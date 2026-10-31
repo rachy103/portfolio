@@ -80,7 +80,7 @@ const WHEEL_R = 0.0956, WHEEL_POS = { front_left: [WB, 0.235], front_right: [WB,
 function makeCar(grey = false, rig = true) {
   const g = new THREE.Group(), wheels = {};
   const src = carGltf.scene.clone(true);
-  const greyMat = new THREE.MeshStandardMaterial({ color: 0x9aa3ae, roughness: 0.5 });
+  const greyMat = new THREE.MeshStandardMaterial({ color: 0x9aa3ae, roughness: 0.5, side: THREE.DoubleSide });
   src.traverse(o => {
     if (!o.isMesh) return;
     o.castShadow = true;
@@ -89,7 +89,7 @@ function makeCar(grey = false, rig = true) {
     if (m) { const k = m[1]; if (!wheels[k]) { wheels[k] = new THREE.Group(); wheels[k].position.set(WHEEL_POS[k][0], WHEEL_POS[k][1], WHEEL_R); g.add(wheels[k]); } wheels[k].userData.parts = (wheels[k].userData.parts || []).concat(o); }
   });
   Object.values(wheels).forEach(w => w.userData.parts.forEach(o => { o.position.set(0, 0, 0); w.add(o); }));
-  src.position.z = WHEEL_R; g.add(src);
+  g.add(src); // body mesh origin is already at ground under the rear axle
   if (rig) {
     const dark = new THREE.MeshStandardMaterial({ color: 0x1b1e23, roughness: 0.6 });
     const blue = new THREE.MeshStandardMaterial({ color: 0x3182f6, emissive: 0x3182f6, emissiveIntensity: 0.6 });
