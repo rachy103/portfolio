@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ctrl-Zero 주행 뷰어</title>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .stage { position: relative; margin-top: 28px; height: 620px; border-radius: 24px; overflow: hidden; background: #0e1116; border: 1px solid var(--line); }
+  .stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+  .modes { position: absolute; left: 16px; top: 16px; display: flex; gap: 6px; }
+  .modes button, .ctl button { font: inherit; font-size: 13px; font-weight: 700; border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer; background: rgba(255,255,255,.14); color: #fff; backdrop-filter: blur(6px); }
+  .modes button.on, .ctl button.on { background: var(--blue); }
+  .ctl { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 6px; align-items: center; }
+  .badge { font-size: 11.5px; color: rgba(255,255,255,.75); font-weight: 600; margin-left: 6px; }
+  .insetlbl { position: absolute; font-size: 11.5px; font-weight: 700; color: #fff; background: rgba(25,31,40,.8); padding: 4px 8px; border-radius: 999px; pointer-events: none; }
+  .phase { position: absolute; left: 50%; top: 18px; transform: translateX(-50%); font-size: 13px; font-weight: 800; color: #fff; background: var(--blue); padding: 7px 14px; border-radius: 999px; display: none; }
+  .explain { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+  .ex { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; }
+  .ex b { font-size: 15px; font-weight: 800; }
+  .ex p { font-size: 13.5px; color: var(--sub); line-height: 1.6; margin-top: 6px; }
+  @media (max-width: 760px) { .stage { height: 560px; } .explain { grid-template-columns: 1fr; } }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="brand" href="index.html"><i></i>윤태환 | 프로젝트 데모</a>
+    <nav class="nav"><a href="ragtal.html">RAGTAL</a><a href="hand.html">Handling Hand</a><a class="on" href="ctrlzero.html">Ctrl-Zero</a><a href="amet.html">AMET</a></nav></div>
+
+  <div class="eyebrow">Ctrl-Zero | 2026.05 ~ 2026.07 | AI 자율주행 경진대회 SW부문 은상</div>
+  <h1>유아용 전동차를 <em>스스로 달리고 주차하는</em> 자율주행 차량으로</h1>
+  <p class="lead">카메라, LiDAR, 노트북, Arduino를 달아 차선 주행부터 수직 주차까지 해낸 차량입니다. 실측 크기로 옮긴 대회 트랙 위에서 두 미션을 재생해 볼 수 있습니다.</p>
+  <div class="chips"><span class="chip on">영상 인식, 판단 로직</span><span class="chip on">시뮬레이션 검증</span><span class="chip">5인 팀</span><span class="chip">GPU 없는 노트북 CPU</span></div>
+
+  <div class="stage" id="stage">
+    <div class="modes"><button id="m-drive" class="on">맵 주행</button><button id="m-park">수직 주차</button></div>
+    <div class="phase" id="phase"></div>
+    <div class="ctl"><button id="follow" class="on">차량 따라가기</button><button id="restart">처음부터</button><span class="badge">매크로 재생, 실제 추론 아님 | 대회 트랙 실측 15.1 x 10.4 m</span></div>
+    <span class="insetlbl" id="lbl1"></span><span class="insetlbl" id="lbl2"></span>
+  </div>
+
+  <div class="explain">
+    <div class="ex"><b>맵 주행: 화면에서 차선을 찾고, 위에서 본 시점으로 펴서 조향 계산</b><p>전방 카메라 영상에서 차선을 분할하고, 관심 영역만 잘라 버드아이뷰로 펴서 차선 중심을 따라가도록 목표 조향각을 정했습니다. 연산은 GPU 없는 노트북 CPU에서 돌렸습니다.</p></div>
+    <div class="ex"><b>수직 주차: 주차선을 차선처럼 보이게 바꿔 기존 차선 모델 재활용</b><p>후방 카메라의 주차선 화면을 회색으로 채우고 노면 질감 노이즈를 더해, 차선 주행 데이터와 비슷한 입력으로 바꿨습니다. 새 모델을 학습하지 않고 차선 인식 모델을 그대로 써서 주차선을 맞췄습니다.</p></div>
+  </div>
+  <footer>윤태환 | Device Software Engineer 지원 포트폴리오 부록</footer>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const MAP_W = 15.0853242321, MAP_H = 10.4436860068;
+const WB = 0.603, MAXSTEER = 18.08 * Math.PI / 180;
+const stage = document.getElementById('stage');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setClearColor(0x0e1116);
+renderer.autoClear = false;
+stage.prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+const world = new THREE.Group(); world.rotation.x = -Math.PI / 2; scene.add(world); // x east, y north, z up
+scene.add(new THREE.HemisphereLight(0xffffff, 0x445566, 1.6));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(3, 8, 4); scene.add(sun);
+
+const tex = new THREE.TextureLoader().load('assets/ctrlzero/track.jpg');
+tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(MAP_W, MAP_H), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.95 }));
+world.add(ground);
+
+// ---------- car (ride-on toy, procedural, real footprint 0.99 x 0.55 m) ----------
+function makeCar(color = 0xf4f6f8, rig = true) {
+  const g = new THREE.Group();
+  const white = new THREE.MeshStandardMaterial({ color, roughness: 0.35 });
+  const dark = new THREE.MeshStandardMaterial({ color: 0x1b1e23, roughness: 0.7 });
+  const body = new THREE.Mesh(new THREE.BoxGeometry(0.99, 0.55, 0.22), white); body.position.set(0.3, 0, 0.2); g.add(body);
+  const hood = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.5, 0.08), white); hood.position.set(0.55, 0, 0.34); g.add(hood);
+  const seat = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.42, 0.06), dark); seat.position.set(0.12, 0, 0.33); g.add(seat);
+  const wheels = [];
+  [[WB, 0.235], [WB, -0.235], [0, 0.235], [0, -0.235]].forEach(([x, y], i) => {
+    const w = new THREE.Group(); w.position.set(x, y, 0.12);
+    w.add(new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.08, 24), dark));
+    g.add(w); wheels.push(w);
+  });
+  if (rig) {
+    const blue = new THREE.MeshStandardMaterial({ color: 0x3182f6, emissive: 0x3182f6, emissiveIntensity: 0.6 });
+    const mast = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.03, 0.55), new THREE.MeshStandardMaterial({ color: 0xb8bec7, metalness: 0.6, roughness: 0.3 }));
+    mast.position.set(0.25, 0, 0.6); g.add(mast);
+    const cam = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.1, 0.04), dark); cam.position.set(0.27, 0, 0.88); g.add(cam);
+    const camLed = new THREE.Mesh(new THREE.BoxGeometry(0.01, 0.06, 0.01), blue); camLed.position.set(0.3, 0, 0.88); g.add(camLed);
+    const laptop = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.32, 0.22), new THREE.MeshStandardMaterial({ color: 0x2a2e35, metalness: 0.4 })); laptop.position.set(0.18, 0, 0.5); g.add(laptop);
+    const lidar = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.05, 20).rotateX(Math.PI / 2), dark); lidar.position.set(0.82, 0, 0.42); g.add(lidar);
+    const rear = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.06, 0.04), dark); rear.position.set(-0.22, 0, 0.36); g.add(rear);
+  }
+  g.userData.wheels = wheels;
+  return g;
+}
+const car = makeCar(); world.add(car);
+
+// ---------- cameras ----------
+const cam = new THREE.PerspectiveCamera(42, 1, 0.05, 80);
+cam.position.set(0, 12, 9);
+const controls = new OrbitControls(cam, renderer.domElement); controls.enableDamping = true; controls.maxPolarAngle = Math.PI * 0.47;
+const front = new THREE.PerspectiveCamera(70, 16 / 9, 0.05, 30);
+const rearCam = new THREE.PerspectiveCamera(75, 16 / 9, 0.05, 20);
+const bev = new THREE.OrthographicCamera(-1.2, 1.2, 1.6, -0.4, 0.1, 10);
+[front, rearCam, bev].forEach(c => scene.add(c));
+
+// rear-camera input transform: paint lines kept, everything else grey plus noise
+const rt = new THREE.WebGLRenderTarget(480, 270);
+const fx = new THREE.ShaderMaterial({
+  uniforms: { tDiffuse: { value: rt.texture }, uTime: { value: 0 } },
+  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }',
+  fragmentShader: `uniform sampler2D tDiffuse; uniform float uTime; varying vec2 vUv;
+    float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233))) * 43758.5453); }
+    void main(){ vec3 c = texture2D(tDiffuse, vUv).rgb; float l = dot(c, vec3(.299,.587,.114));
+      float n = (h(floor(vUv*vec2(480.,270.)) + floor(uTime*12.)) - .5) * .18;
+      float line = smoothstep(.62, .78, l);
+      vec3 g = vec3(.42 + n); gl_FragColor = vec4(mix(g, vec3(1.), line), 1.); }`,
+  depthTest: false, depthWrite: false,
+});
+const fxScene = new THREE.Scene(), fxCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+fxScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), fx));
+
+// ---------- lane path ----------
+const lane = (await (await fetch('assets/ctrlzero/lane.json')).json()).lane.map(([x, y]) => new THREE.Vector3(x, y, 0));
+const SPAWN = new THREE.Vector2(-6.382, 1.253);
+let k0 = 0, best = 1e9; lane.forEach((p, i) => { const d = Math.hypot(p.x - SPAWN.x, p.y - SPAWN.y); if (d < best) { best = d; k0 = i; } });
+let ordered = lane.slice(k0).concat(lane.slice(0, k0));
+if (ordered[3].y > ordered[0].y) ordered = [ordered[0], ...ordered.slice(1).reverse()]; // drive south from spawn
+const curve = new THREE.CatmullRomCurve3(ordered, true, 'centripetal');
+const LEN = curve.getLength();
+const trail = new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getSpacedPoints(400)), new THREE.LineDashedMaterial({ color: 0x3182f6, dashSize: 0.15, gapSize: 0.1 }));
+trail.computeLineDistances(); trail.position.z = 0.01; world.add(trail);
+
+// ---------- parking scene ----------
+const BAY_X = [-0.8727, 0.0685, 1.0095, 1.9541, 2.8975], BAY_TOP = 1.5317, BAY_MOUTH = 0.2205;
+const bayC = b => (BAY_X[b - 1] + BAY_X[b]) / 2, bayY = (BAY_TOP + BAY_MOUTH) / 2;
+const parkGroup = new THREE.Group(); world.add(parkGroup);
+[2, 4].forEach(b => { const o = makeCar(0x9aa3ae, false); o.rotation.z = Math.PI / 2; o.position.set(bayC(b), bayY - 0.3, 0); parkGroup.add(o); });
+const target = new THREE.Mesh(new THREE.PlaneGeometry(BAY_X[3] - BAY_X[2] - 0.06, BAY_TOP - BAY_MOUTH - 0.06), new THREE.MeshBasicMaterial({ color: 0x3182f6, transparent: true, opacity: 0.18 }));
+target.position.set(bayC(3), bayY, 0.006); parkGroup.add(target);
+
+function planParking() {
+  // two-arc plan from parking_scenario.timed_plan: forward swing at full left lock, reverse at full right lock into bay 3
+  const R = WB / Math.tan(MAXSTEER), ys = -0.749 - 0.235, yEnd = 0.7;
+  const th1 = Math.acos(((yEnd - ys) / R + 1) / 2);
+  const sim = (x0) => {
+    const pts = []; let x = x0, y = ys, yaw = Math.PI;
+    const step = (v, d, n) => { for (let i = 0; i < n; i++) { const dt = 0.01; x += v * Math.cos(yaw) * dt; y += v * Math.sin(yaw) * dt; yaw += v / WB * Math.tan(d) * dt; pts.push({ x, y, yaw, v, d }); } };
+    step(0.6, 0, 1); let n = 0;
+    while (yaw < Math.PI + th1 && n++ < 5000) step(0.6, MAXSTEER, 1);
+    n = 0; while (yaw < 1.5 * Math.PI && n++ < 8000) step(-0.45, -MAXSTEER, 1);
+    return pts;
+  };
+  const probe = sim(0), endX = probe[probe.length - 1].x, startX = bayC(3) - endX;
+  const startRear = { x: 4.121 + WB, y: ys, yaw: Math.PI, v: 0, d: 0 };
+  const approach = [];
+  for (let x = startRear.x; x > startX; x -= 0.006) approach.push({ x, y: ys, yaw: Math.PI, v: 0.6, d: 0 });
+  const arcs = sim(startX), path = approach.concat(arcs);
+  const swingEnd = approach.length + arcs.findIndex(p => p.v < 0);
+  return { path, swingEnd, approachEnd: approach.length };
+}
+const park = planParking();
+const parkLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints(park.path.filter((_, i) => i % 5 === 0).map(p => new THREE.Vector3(p.x, p.y, 0.012))), new THREE.LineDashedMaterial({ color: 0x3182f6, dashSize: 0.08, gapSize: 0.06 }));
+parkLine.computeLineDistances(); parkGroup.add(parkLine);
+
+// ---------- state ----------
+let mode = 'drive', s = 0, idx = 0, hold = 0, follow = true;
+const phaseEl = document.getElementById('phase'), lbl1 = document.getElementById('lbl1'), lbl2 = document.getElementById('lbl2');
+function setMode(m) {
+  mode = m; s = 0; idx = 0; hold = 0;
+  document.getElementById('m-drive').classList.toggle('on', m === 'drive');
+  document.getElementById('m-park').classList.toggle('on', m === 'park');
+  trail.visible = m === 'drive'; parkGroup.visible = m === 'park';
+  phaseEl.style.display = m === 'park' ? 'block' : 'none';
+  lbl1.textContent = m === 'drive' ? '전방 카메라' : '후방 카메라';
+  lbl2.textContent = m === 'drive' ? '버드아이뷰로 편 차선' : '차선 모델 입력: 회색 채움 + 노이즈';
+  if (m === 'park') { cam.position.set(1.4, 5.5, 3.2); controls.target.set(1.6, 0.4, 0); }
+}
+document.getElementById('m-drive').onclick = () => setMode('drive');
+document.getElementById('m-park').onclick = () => setMode('park');
+document.getElementById('restart').onclick = () => setMode(mode);
+const fb = document.getElementById('follow');
+fb.onclick = () => { follow = !follow; fb.classList.toggle('on', follow); };
+controls.addEventListener('start', () => { follow = false; fb.classList.remove('on'); });
+
+function placeCar(x, y, yaw, steer) {
+  car.position.set(x, y, 0); car.rotation.z = yaw;
+  car.userData.wheels.forEach((w, i) => { w.rotation.z = i < 2 ? steer : 0; });
+}
+const tmp = new THREE.Vector3(), fwd = new THREE.Vector3();
+function attachCams(yaw) {
+  const c = Math.cos(yaw), si = Math.sin(yaw);
+  const toScene = v => v.applyMatrix4(world.matrixWorld);
+  const p = car.position;
+  // front camera on the mast, pitched down
+  front.position.copy(toScene(tmp.set(p.x + c * 0.95, p.y + si * 0.95, 0.75)));
+  front.lookAt(toScene(fwd.set(p.x + c * 3.0, p.y + si * 3.0, 0)));
+  rearCam.position.copy(toScene(tmp.set(p.x - c * 0.3, p.y - si * 0.3, 0.5)));
+  rearCam.lookAt(toScene(fwd.set(p.x - c * 1.4, p.y - si * 1.4, 0)));
+  bev.position.copy(toScene(tmp.set(p.x + c * 1.4, p.y + si * 1.4, 4)));
+  bev.up.copy(new THREE.Vector3(c, si, 0).applyMatrix4(new THREE.Matrix4().extractRotation(world.matrixWorld)));
+  bev.lookAt(toScene(fwd.set(p.x + c * 1.4, p.y + si * 1.4, 0)));
+}
+
+// ---------- loop ----------
+function size() { const r = stage.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); cam.aspect = r.width / r.height; cam.updateProjectionMatrix(); return r; }
+let R = size(); addEventListener('resize', () => R = size());
+const clock = new THREE.Clock();
+setMode('drive');
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
+  world.updateMatrixWorld();
+  let yaw = 0;
+  if (mode === 'drive') {
+    s = (s + dt * 1.56 / LEN) % 1;
+    const p = curve.getPointAt(s), tg = curve.getTangentAt(s), ahead = curve.getTangentAt((s + 0.6 / LEN) % 1);
+    yaw = Math.atan2(tg.y, tg.x);
+    const steer = THREE.MathUtils.clamp(Math.atan2(tg.x * ahead.y - tg.y * ahead.x, tg.dot(ahead)) * 2.2, -MAXSTEER, MAXSTEER);
+    placeCar(p.x - Math.cos(yaw) * WB / 2, p.y - Math.sin(yaw) * WB / 2, yaw, steer);
+  } else {
+    if (idx < park.path.length - 1) idx = Math.min(park.path.length - 1, idx + Math.round(dt * 100 * 1.5));
+    else if ((hold += dt) > 2.5) { idx = 0; hold = 0; }
+    const q = park.path[idx]; yaw = q.yaw; placeCar(q.x, q.y, q.yaw, q.d);
+    phaseEl.textContent = idx < park.approachEnd ? '1. 주차 공간 탐색, LiDAR로 주차된 차 두 대 확인' : idx < park.swingEnd ? '2. 앞으로 크게 돌아 나가기' : idx < park.path.length - 1 ? '3. 후진하며 후방 카메라로 주차선 정렬' : '주차 완료';
+  }
+  attachCams(yaw);
+  if (follow) {
+    const tgt = new THREE.Vector3(car.position.x, car.position.y, 0).applyMatrix4(world.matrixWorld);
+    const back = new THREE.Vector3(car.position.x - Math.cos(yaw) * (mode === 'drive' ? 3.2 : 2.6), car.position.y - Math.sin(yaw) * (mode === 'drive' ? 3.2 : 2.6), mode === 'drive' ? 2.2 : 3.2).applyMatrix4(world.matrixWorld);
+    cam.position.lerp(back, 0.06); controls.target.lerp(tgt, 0.12);
+  }
+  controls.update();
+
+  const W = R.width, H = R.height, iw = Math.min(300, W * 0.36), ih = iw * 9 / 16, pad = 16;
+  renderer.setViewport(0, 0, W, H); renderer.setScissorTest(false); renderer.clear(); renderer.render(scene, cam);
+  // inset 1: front or rear camera
+  const x1 = W - iw - pad, y1 = H - ih - pad;
+  renderer.setScissorTest(true);
+  const camA = mode === 'drive' ? front : rearCam; camA.aspect = 16 / 9; camA.updateProjectionMatrix();
+  renderer.setScissor(x1, y1, iw, ih); renderer.setViewport(x1, y1, iw, ih); renderer.clear(); renderer.render(scene, camA);
+  // inset 2: BEV or processed rear input
+  const y2 = y1 - ih - 12;
+  renderer.setScissor(x1, y2, iw, ih); renderer.setViewport(x1, y2, iw, ih); renderer.clear();
+  if (mode === 'drive') { bev.left = -1.2 * 16 / 9 * 0.7; bev.right = -bev.left; bev.top = 1.3; bev.bottom = -0.3; bev.updateProjectionMatrix(); renderer.render(scene, bev); }
+  else {
+    renderer.setScissorTest(false); renderer.setRenderTarget(rt); renderer.setViewport(0, 0, 480, 270); renderer.clear(); renderer.render(scene, rearCam); renderer.setRenderTarget(null);
+    renderer.setScissorTest(true); renderer.setScissor(x1, y2, iw, ih); renderer.setViewport(x1, y2, iw, ih); fx.uniforms.uTime.value = t; renderer.render(fxScene, fxCam);
+  }
+  renderer.setScissorTest(false);
+  lbl1.style.cssText = `right:${pad + 8}px;top:${pad + 8}px`;
+  lbl2.style.cssText = `right:${pad + 8}px;top:${pad + ih + 12 + 8}px`;
+});
+</script>
+</body>
+</html>

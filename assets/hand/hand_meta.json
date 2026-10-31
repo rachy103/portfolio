@@ -1,0 +1,534 @@
+{
+ "urdf": "hand.urdf",
+ "units": "metre",
+ "up_axis": "+z (fingers point +z); palm faces -y; three.js: robot.rotation.x = -Math.PI/2 for a Y-up scene",
+ "hand": "left",
+ "dof_actuated": 16,
+ "joints": [
+  {
+   "name": "index_abd",
+   "finger": "index",
+   "role": "MCP abduction/adduction (servo, small servo v4:1)",
+   "lower": -0.35,
+   "upper": 0.35,
+   "ui": [
+    -0.35,
+    0.35
+   ],
+   "note": "+q tilts the finger away from the middle finger"
+  },
+  {
+   "name": "index_mcp",
+   "finger": "index",
+   "role": "MCP flexion (servo, small servo v4 R)",
+   "lower": 0.0,
+   "upper": 3.316126,
+   "ui": [
+    0.0,
+    1.65
+   ]
+  },
+  {
+   "name": "index_pip",
+   "finger": "index",
+   "role": "PIP flexion (servo, small servo v4 link)",
+   "lower": 0.0,
+   "upper": 1.745329,
+   "ui": [
+    0.0,
+    1.5708
+   ]
+  },
+  {
+   "name": "index_dip",
+   "finger": "index",
+   "role": "DIP flexion, passive four-bar driven by PIP",
+   "lower": 0.0,
+   "upper": 1.745329,
+   "mimic": "index_pip",
+   "multiplier": 1.0405
+  },
+  {
+   "name": "index_dip_coupler",
+   "finger": "index",
+   "role": "3 mm coupler link of the PIP-DIP four-bar (visual only)",
+   "lower": -0.05,
+   "upper": 2.6,
+   "mimic": "index_pip",
+   "multiplier": 1.3812
+  },
+  {
+   "name": "middle_abd",
+   "finger": "middle",
+   "role": "MCP abduction/adduction (servo, small servo v4:1)",
+   "lower": -0.35,
+   "upper": 0.35,
+   "ui": [
+    -0.35,
+    0.35
+   ],
+   "note": "+q tilts toward the ring finger"
+  },
+  {
+   "name": "middle_mcp",
+   "finger": "middle",
+   "role": "MCP flexion (servo, small servo v4 R)",
+   "lower": 0.0,
+   "upper": 3.316126,
+   "ui": [
+    0.0,
+    1.65
+   ]
+  },
+  {
+   "name": "middle_pip",
+   "finger": "middle",
+   "role": "PIP flexion (servo, small servo v4 link)",
+   "lower": 0.0,
+   "upper": 1.745329,
+   "ui": [
+    0.0,
+    1.5708
+   ]
+  },
+  {
+   "name": "middle_dip",
+   "finger": "middle",
+   "role": "DIP flexion, passive four-bar driven by PIP",
+   "lower": 0.0,
+   "upper": 1.745329,
+   "mimic": "middle_pip",
+   "multiplier": 1.0405
+  },
+  {
+   "name": "middle_dip_coupler",
+   "finger": "middle",
+   "role": "3 mm coupler link of the PIP-DIP four-bar (visual only)",
+   "lower": -0.05,
+   "upper": 2.6,
+   "mimic": "middle_pip",
+   "multiplier": 1.3812
+  },
+  {
+   "name": "ring_abd",
+   "finger": "ring",
+   "role": "MCP abduction/adduction (servo, small servo v4:1)",
+   "lower": -0.35,
+   "upper": 0.35,
+   "ui": [
+    -0.35,
+    0.35
+   ],
+   "note": "+q tilts the finger away from the middle finger"
+  },
+  {
+   "name": "ring_mcp",
+   "finger": "ring",
+   "role": "MCP flexion (servo, small servo v4 R)",
+   "lower": 0.0,
+   "upper": 3.316126,
+   "ui": [
+    0.0,
+    1.65
+   ]
+  },
+  {
+   "name": "ring_pip",
+   "finger": "ring",
+   "role": "PIP flexion (servo, small servo v4 link)",
+   "lower": 0.0,
+   "upper": 1.745329,
+   "ui": [
+    0.0,
+    1.5708
+   ]
+  },
+  {
+   "name": "ring_dip",
+   "finger": "ring",
+   "role": "DIP flexion, passive four-bar driven by PIP",
+   "lower": 0.0,
+   "upper": 1.745329,
+   "mimic": "ring_pip",
+   "multiplier": 1.0405
+  },
+  {
+   "name": "ring_dip_coupler",
+   "finger": "ring",
+   "role": "3 mm coupler link of the PIP-DIP four-bar (visual only)",
+   "lower": -0.05,
+   "upper": 2.6,
+   "mimic": "ring_pip",
+   "multiplier": 1.3812
+  },
+  {
+   "name": "little_abd",
+   "finger": "little",
+   "role": "MCP abduction/adduction (servo, small servo v4:1)",
+   "lower": -0.35,
+   "upper": 0.35,
+   "ui": [
+    -0.35,
+    0.35
+   ],
+   "note": "+q tilts the finger away from the middle finger"
+  },
+  {
+   "name": "little_mcp",
+   "finger": "little",
+   "role": "MCP flexion (servo, small servo v4 R)",
+   "lower": 0.0,
+   "upper": 3.316126,
+   "ui": [
+    0.0,
+    1.65
+   ]
+  },
+  {
+   "name": "little_pip",
+   "finger": "little",
+   "role": "PIP flexion (servo, small servo v4 link)",
+   "lower": 0.0,
+   "upper": 1.745329,
+   "ui": [
+    0.0,
+    1.5708
+   ]
+  },
+  {
+   "name": "little_dip",
+   "finger": "little",
+   "role": "DIP flexion, passive four-bar driven by PIP",
+   "lower": 0.0,
+   "upper": 1.745329,
+   "mimic": "little_pip",
+   "multiplier": 1.0405
+  },
+  {
+   "name": "little_dip_coupler",
+   "finger": "little",
+   "role": "3 mm coupler link of the PIP-DIP four-bar (visual only)",
+   "lower": -0.05,
+   "upper": 2.6,
+   "mimic": "little_pip",
+   "multiplier": 1.3812
+  },
+  {
+   "name": "thumb_cmc",
+   "finger": "thumb",
+   "role": "thumb base rotation / MCP abduction (servo, small servo v4:1)",
+   "lower": -1.2,
+   "upper": 1.2,
+   "ui": [
+    -1.2,
+    1.2
+   ]
+  },
+  {
+   "name": "thumb_mcp",
+   "finger": "thumb",
+   "role": "thumb MCP flexion (servo, small servo v4 R)",
+   "lower": 0.0,
+   "upper": 1.745329,
+   "ui": [
+    0.0,
+    1.745329
+   ]
+  },
+  {
+   "name": "thumb_pip",
+   "finger": "thumb",
+   "role": "thumb PIP flexion (servo, small servo v4:2)",
+   "lower": -1.745329,
+   "upper": 1.745329,
+   "ui": [
+    -1.745329,
+    1.745329
+   ]
+  },
+  {
+   "name": "thumb_dip",
+   "finger": "thumb",
+   "role": "thumb DIP flexion, independently driven (servo, small servo v4:3)",
+   "lower": 0.0,
+   "upper": 1.745329,
+   "ui": [
+    0.0,
+    1.745329
+   ]
+  }
+ ],
+ "pip_dip_linkage": {
+  "theta_pip_rad": [
+   0.0,
+   0.043633,
+   0.087266,
+   0.1309,
+   0.174533,
+   0.218166,
+   0.261799,
+   0.305433,
+   0.349066,
+   0.392699,
+   0.436332,
+   0.479966,
+   0.523599,
+   0.567232,
+   0.610865,
+   0.654498,
+   0.698132,
+   0.741765,
+   0.785398,
+   0.829031,
+   0.872665,
+   0.916298,
+   0.959931,
+   1.003564,
+   1.047198,
+   1.090831,
+   1.134464,
+   1.178097,
+   1.22173,
+   1.265364,
+   1.308997,
+   1.35263,
+   1.396263,
+   1.439897,
+   1.48353,
+   1.527163,
+   1.570796,
+   1.61443,
+   1.658063,
+   1.701696,
+   1.745329
+  ],
+  "phi_dip_rad": [
+   0.0,
+   0.024451,
+   0.054883,
+   0.090846,
+   0.131725,
+   0.1768,
+   0.225318,
+   0.276537,
+   0.329765,
+   0.38438,
+   0.439838,
+   0.495674,
+   0.551499,
+   0.60699,
+   0.661885,
+   0.715976,
+   0.769098,
+   0.821123,
+   0.871959,
+   0.921536,
+   0.969812,
+   1.016758,
+   1.062363,
+   1.106626,
+   1.149559,
+   1.191179,
+   1.231508,
+   1.270574,
+   1.308409,
+   1.345044,
+   1.380515,
+   1.414855,
+   1.4481,
+   1.480284,
+   1.51144,
+   1.5416,
+   1.570796,
+   1.599057,
+   1.62641,
+   1.65288,
+   1.678491
+  ],
+  "coupler_rad": [
+   0.0,
+   0.065971,
+   0.133768,
+   0.203131,
+   0.273739,
+   0.345227,
+   0.417218,
+   0.489345,
+   0.561268,
+   0.632683,
+   0.703323,
+   0.772965,
+   0.841425,
+   0.908555,
+   0.974242,
+   1.0384,
+   1.100971,
+   1.161918,
+   1.221223,
+   1.278886,
+   1.334918,
+   1.389341,
+   1.442187,
+   1.493495,
+   1.543307,
+   1.591672,
+   1.638641,
+   1.684266,
+   1.728601,
+   1.771701,
+   1.813621,
+   1.854414,
+   1.894136,
+   1.932838,
+   1.970572,
+   2.007389,
+   2.043339,
+   2.078468,
+   2.112825,
+   2.146455,
+   2.179401
+  ],
+  "mimic_dip_multiplier": 1.0405,
+  "mimic_coupler_multiplier": 1.3812,
+  "max_dip_error_deg_0_90": 3.65,
+  "max_coupler_pin_gap_mm_0_90": 3.82,
+  "link_length_mm": 30.379,
+  "points_mm_in_PIP_frame_yz": {
+   "A": [
+    0.0,
+    9.86
+   ],
+   "D": [
+    0.0,
+    30.0
+   ],
+   "B": [
+    -6.6,
+    39.514
+   ]
+  }
+ },
+ "materials": {
+  "black_pla": [
+   0.16,
+   0.165,
+   0.175,
+   1.0
+  ],
+  "fingertip_grey": [
+   0.78,
+   0.785,
+   0.77,
+   1.0
+  ]
+ },
+ "meshes": {
+  "palm.stl": 2248,
+  "finger_base.stl": 1670,
+  "finger_abd.stl": 570,
+  "finger_proximal.stl": 3198,
+  "finger_middle.stl": 1370,
+  "finger_distal.stl": 1108,
+  "finger_distal_tip.stl": 1104,
+  "finger_coupler.stl": 364,
+  "thumb_base.stl": 1678,
+  "thumb_cmc.stl": 570,
+  "thumb_mcp.stl": 3169,
+  "thumb_pip.stl": 2119,
+  "thumb_tip.stl": 754
+ },
+ "total_bytes": 997192,
+ "poses": {
+  "open": {
+   "index_abd": 0.0,
+   "index_mcp": 0.0,
+   "index_pip": 0.0,
+   "middle_abd": 0.0,
+   "middle_mcp": 0.0,
+   "middle_pip": 0.0,
+   "ring_abd": 0.0,
+   "ring_mcp": 0.0,
+   "ring_pip": 0.0,
+   "little_abd": 0.0,
+   "little_mcp": 0.0,
+   "little_pip": 0.0,
+   "thumb_cmc": 0.0,
+   "thumb_mcp": 0.0,
+   "thumb_pip": 0.0,
+   "thumb_dip": 0.0
+  },
+  "closed": {
+   "index_abd": 0.0,
+   "index_mcp": 1.05,
+   "index_pip": 1.3,
+   "middle_abd": 0.0,
+   "middle_mcp": 1.05,
+   "middle_pip": 1.3,
+   "ring_abd": 0.0,
+   "ring_mcp": 1.05,
+   "ring_pip": 1.3,
+   "little_abd": 0.0,
+   "little_mcp": 1.05,
+   "little_pip": 1.3,
+   "thumb_cmc": 1.1,
+   "thumb_mcp": 0.65,
+   "thumb_pip": 0.5,
+   "thumb_dip": 0.8
+  },
+  "pinch": {
+   "index_abd": 0.35,
+   "index_mcp": 1.3,
+   "index_pip": 1.3014,
+   "middle_abd": 0.0,
+   "middle_mcp": 0.0,
+   "middle_pip": 0.0,
+   "ring_abd": 0.0,
+   "ring_mcp": 0.0,
+   "ring_pip": 0.0,
+   "little_abd": 0.0,
+   "little_mcp": 0.0,
+   "little_pip": 0.0,
+   "thumb_cmc": 0.3,
+   "thumb_mcp": 0.1189,
+   "thumb_pip": 0.9946,
+   "thumb_dip": 0.0
+  },
+  "spread": {
+   "index_abd": 0.3,
+   "index_mcp": 0.0,
+   "index_pip": 0.0,
+   "middle_abd": 0.0,
+   "middle_mcp": 0.0,
+   "middle_pip": 0.0,
+   "ring_abd": 0.2,
+   "ring_mcp": 0.0,
+   "ring_pip": 0.0,
+   "little_abd": 0.35,
+   "little_mcp": 0.0,
+   "little_pip": 0.0,
+   "thumb_cmc": 0.0,
+   "thumb_mcp": 0.0,
+   "thumb_pip": -0.35,
+   "thumb_dip": 0.0
+  }
+ },
+ "poses_note": "open = CAD zero pose; closed = power grasp (fingers curled, thumb across index) with no interpenetration; pinch = thumb pad on index fingertip (solved numerically); spread = MCP abduction. Mimic joints (finger *_dip, *_dip_coupler) follow *_pip automatically.",
+ "bbox_open_m": {
+  "min": [
+   -0.0953,
+   -0.0281,
+   -0.0322
+  ],
+  "max": [
+   0.047,
+   0.019,
+   0.1899
+  ],
+  "center": [
+   -0.0241,
+   -0.0046,
+   0.0788
+  ]
+ },
+ "meshes_note": "Exterior-only visual meshes (internal mechanism removed); triangle counts per file."
+}

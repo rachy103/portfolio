@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>윤태환 프로젝트 데모</title>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .hero { padding: 40px 0 10px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 34px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+  .card .img { aspect-ratio: 16 / 9; background: #0e1116 center / cover no-repeat; position: relative; }
+  .card .img span { position: absolute; left: 14px; top: 14px; font-size: 12px; font-weight: 700; color: #fff; background: var(--blue); padding: 5px 10px; border-radius: 999px; }
+  .card .bd { padding: 16px 18px 18px; }
+  .card .t { font-size: 18px; font-weight: 800; letter-spacing: -0.03em; }
+  .card .s { font-size: 14px; color: var(--sub); margin-top: 6px; line-height: 1.55; }
+  .card .m { font-size: 12.5px; color: var(--g500); margin-top: 10px; font-weight: 600; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="brand"><i></i>윤태환 | 프로젝트 데모</span>
+    <nav class="nav"><a href="ragtal.html">RAGTAL</a><a href="hand.html">Handling Hand</a><a href="ctrlzero.html">Ctrl-Zero</a><a href="amet.html">AMET</a></nav></div>
+  <div class="hero">
+    <div class="eyebrow">Device Software Engineer (Android) 지원 | 포트폴리오 부록</div>
+    <h1>포트폴리오의 프로젝트를 <em>직접 움직여 볼 수 있게</em> 모았습니다</h1>
+    <p class="lead">사진과 설명은 포트폴리오에 담고, 여기에는 움직여 봐야 이해되는 것만 담았습니다. 3D 뷰어는 브라우저에서 바로 돌아가고, 영상은 모두 실제 기록입니다.</p>
+  </div>
+  <div class="grid">
+    <a class="card" href="ragtal.html"><div class="img" style="background-image:url(assets/ragtal/teleop.jpg)"><span>3D 인터랙티브</span></div><div class="bd"><div class="t">RAGTAL, 힘 피드백 원격조작</div><div class="s">리더암 관절을 드래그하면 RB10 협동로봇이 같은 각도로 따라오고, 작업대에 닿으면 힘이 되돌아옵니다.</div><div class="m">창의혁신 DNA 산학협력 대상 | 프로젝트 리더</div></div></a>
+    <a class="card" href="hand.html"><div class="img" style="background-image:url(assets/hand/bulb_full_8x.jpg)"><span>3D 인터랙티브</span></div><div class="bd"><div class="t">Handling Hand, 16자유도 로봇핸드</div><div class="s">손가락별로 관절을 움직이고, 중간 관절을 따라 굽는 손끝 연동 링크를 확인할 수 있습니다.</div><div class="m">전국학생설계경진대회 동상 | ESP32 펌웨어, 시뮬레이션 검증</div></div></a>
+    <a class="card" href="ctrlzero.html"><div class="img" style="background-image:url(assets/ctrlzero/track.jpg)"><span>주행 재생</span></div><div class="bd"><div class="t">Ctrl-Zero, 전동차 개조 자율주행</div><div class="s">실측 대회 트랙에서 맵 주행과 수직 주차를 재생하고, 차량이 본 화면을 함께 봅니다.</div><div class="m">AI 자율주행 경진대회 SW부문 은상 | 영상 인식, 판단 로직</div></div></a>
+    <a class="card" href="amet.html"><div class="img" style="background-image:url(assets/amet/labels_151329.jpg)"><span>라벨 영상</span></div><div class="bd"><div class="t">AMET 2026, End-to-End 주행</div><div class="s">정답 조향이 없던 실제 주행 영상에 프레임마다 방향과 속도를 지정한 라벨을 이어 보여 줍니다.</div><div class="m">자율주행 해커톤 최우수상, 본선 2위</div></div></a>
+  </div>
+  <footer>윤태환 | 3D 뷰어의 RB10 형상은 제조사 CAD, Handling Hand는 팀 설계 CAD 기반입니다.</footer>
+</div>
+</body>
+</html>

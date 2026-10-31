@@ -1,0 +1,443 @@
+<?xml version="1.0"?>
+<!-- Handling (SKKU) 16-DoF low-cost modular robot hand, LEFT hand. Web/visual model.
+     Units: metres. Root: palm_link. +z = finger direction (up), -y = palm side
+     (fingers flex toward -y), +x = little-finger side, thumb on the -x side.
+     16 actuated joints (4 x abd/mcp/pip + thumb cmc/mcp/pip/dip); finger DIP and the
+     3 mm coupler link are <mimic> joints of PIP (passive PIP-DIP four-bar).
+     Generated from the Inventor assembly (left hand v2.iam) by build_web_hand.py.
+     DIP mimic = linear fit of the four-bar; exact PIP->DIP table in hand_meta.json -->
+<robot name="handling_hand_left">
+  <material name="black_pla"><color rgba="0.160000 0.165000 0.175000 1.000000"/></material>
+  <material name="fingertip_grey"><color rgba="0.780000 0.785000 0.770000 1.000000"/></material>
+  <link name="palm_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/palm.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="index_base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_base.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="index_abd_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_abd.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="index_proximal_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_proximal.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="index_middle_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_middle.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="index_distal_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_distal.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_distal_tip.stl"/></geometry>
+      <material name="fingertip_grey"/>
+    </visual>
+  </link>
+  <link name="index_coupler_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_coupler.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="middle_base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_base.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="middle_abd_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_abd.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="middle_proximal_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_proximal.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="middle_middle_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_middle.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="middle_distal_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_distal.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_distal_tip.stl"/></geometry>
+      <material name="fingertip_grey"/>
+    </visual>
+  </link>
+  <link name="middle_coupler_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_coupler.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="ring_base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_base.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="ring_abd_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_abd.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="ring_proximal_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_proximal.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="ring_middle_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_middle.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="ring_distal_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_distal.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_distal_tip.stl"/></geometry>
+      <material name="fingertip_grey"/>
+    </visual>
+  </link>
+  <link name="ring_coupler_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_coupler.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="little_base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_base.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="little_abd_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_abd.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="little_proximal_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_proximal.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="little_middle_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_middle.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="little_distal_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_distal.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_distal_tip.stl"/></geometry>
+      <material name="fingertip_grey"/>
+    </visual>
+  </link>
+  <link name="little_coupler_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/finger_coupler.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="thumb_base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/thumb_base.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="thumb_cmc_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/thumb_cmc.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="thumb_mcp_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/thumb_mcp.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="thumb_pip_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/thumb_pip.stl"/></geometry>
+      <material name="black_pla"/>
+    </visual>
+  </link>
+  <link name="thumb_dip_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/thumb_tip.stl"/></geometry>
+      <material name="fingertip_grey"/>
+    </visual>
+  </link>
+  <joint name="index_base_mount" type="fixed">
+    <parent link="palm_link"/>
+    <child link="index_base_link"/>
+    <origin xyz="-0.036000 0.004352 0.050563" rpy="0 0 0"/>
+  </joint>
+  <joint name="index_abd" type="revolute">
+    <parent link="index_base_link"/>
+    <child link="index_abd_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 -1.000000 0"/>
+    <limit lower="-0.350000" upper="0.350000" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="index_mcp" type="revolute">
+    <parent link="index_abd_link"/>
+    <child link="index_proximal_link"/>
+    <origin xyz="0 -0.004692 0.019800" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="3.316126" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="index_pip" type="revolute">
+    <parent link="index_proximal_link"/>
+    <child link="index_middle_link"/>
+    <origin xyz="0 0 0.046026" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="1.745329" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="index_dip" type="revolute">
+    <parent link="index_middle_link"/>
+    <child link="index_distal_link"/>
+    <origin xyz="0 0 0.030000" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="1.745329" effort="0.18" velocity="6.0"/>
+    <mimic joint="index_pip" multiplier="1.0405" offset="0"/>
+  </joint>
+  <joint name="index_dip_coupler" type="revolute">
+    <parent link="index_proximal_link"/>
+    <child link="index_coupler_link"/>
+    <origin xyz="0 0 0.055886" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="-0.050000" upper="2.600000" effort="0.18" velocity="6.0"/>
+    <mimic joint="index_pip" multiplier="1.3812" offset="0"/>
+  </joint>
+  <joint name="middle_base_mount" type="fixed">
+    <parent link="palm_link"/>
+    <child link="middle_base_link"/>
+    <origin xyz="-0.012000 0.004352 0.060563" rpy="0 0 0"/>
+  </joint>
+  <joint name="middle_abd" type="revolute">
+    <parent link="middle_base_link"/>
+    <child link="middle_abd_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1.000000 0"/>
+    <limit lower="-0.350000" upper="0.350000" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="middle_mcp" type="revolute">
+    <parent link="middle_abd_link"/>
+    <child link="middle_proximal_link"/>
+    <origin xyz="0 -0.004692 0.019800" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="3.316126" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="middle_pip" type="revolute">
+    <parent link="middle_proximal_link"/>
+    <child link="middle_middle_link"/>
+    <origin xyz="0 0 0.046026" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="1.745329" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="middle_dip" type="revolute">
+    <parent link="middle_middle_link"/>
+    <child link="middle_distal_link"/>
+    <origin xyz="0 0 0.030000" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="1.745329" effort="0.18" velocity="6.0"/>
+    <mimic joint="middle_pip" multiplier="1.0405" offset="0"/>
+  </joint>
+  <joint name="middle_dip_coupler" type="revolute">
+    <parent link="middle_proximal_link"/>
+    <child link="middle_coupler_link"/>
+    <origin xyz="0 0 0.055886" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="-0.050000" upper="2.600000" effort="0.18" velocity="6.0"/>
+    <mimic joint="middle_pip" multiplier="1.3812" offset="0"/>
+  </joint>
+  <joint name="ring_base_mount" type="fixed">
+    <parent link="palm_link"/>
+    <child link="ring_base_link"/>
+    <origin xyz="0.012000 0.004352 0.050563" rpy="0 0 0"/>
+  </joint>
+  <joint name="ring_abd" type="revolute">
+    <parent link="ring_base_link"/>
+    <child link="ring_abd_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1.000000 0"/>
+    <limit lower="-0.350000" upper="0.350000" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="ring_mcp" type="revolute">
+    <parent link="ring_abd_link"/>
+    <child link="ring_proximal_link"/>
+    <origin xyz="0 -0.004692 0.019800" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="3.316126" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="ring_pip" type="revolute">
+    <parent link="ring_proximal_link"/>
+    <child link="ring_middle_link"/>
+    <origin xyz="0 0 0.046026" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="1.745329" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="ring_dip" type="revolute">
+    <parent link="ring_middle_link"/>
+    <child link="ring_distal_link"/>
+    <origin xyz="0 0 0.030000" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="1.745329" effort="0.18" velocity="6.0"/>
+    <mimic joint="ring_pip" multiplier="1.0405" offset="0"/>
+  </joint>
+  <joint name="ring_dip_coupler" type="revolute">
+    <parent link="ring_proximal_link"/>
+    <child link="ring_coupler_link"/>
+    <origin xyz="0 0 0.055886" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="-0.050000" upper="2.600000" effort="0.18" velocity="6.0"/>
+    <mimic joint="ring_pip" multiplier="1.3812" offset="0"/>
+  </joint>
+  <joint name="little_base_mount" type="fixed">
+    <parent link="palm_link"/>
+    <child link="little_base_link"/>
+    <origin xyz="0.036000 0.004352 0.040563" rpy="0 0 0"/>
+  </joint>
+  <joint name="little_abd" type="revolute">
+    <parent link="little_base_link"/>
+    <child link="little_abd_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1.000000 0"/>
+    <limit lower="-0.350000" upper="0.350000" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="little_mcp" type="revolute">
+    <parent link="little_abd_link"/>
+    <child link="little_proximal_link"/>
+    <origin xyz="0 -0.004692 0.019800" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="3.316126" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="little_pip" type="revolute">
+    <parent link="little_proximal_link"/>
+    <child link="little_middle_link"/>
+    <origin xyz="0 0 0.046026" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="1.745329" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="little_dip" type="revolute">
+    <parent link="little_middle_link"/>
+    <child link="little_distal_link"/>
+    <origin xyz="0 0 0.030000" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="0.000000" upper="1.745329" effort="0.18" velocity="6.0"/>
+    <mimic joint="little_pip" multiplier="1.0405" offset="0"/>
+  </joint>
+  <joint name="little_dip_coupler" type="revolute">
+    <parent link="little_proximal_link"/>
+    <child link="little_coupler_link"/>
+    <origin xyz="0 0 0.055886" rpy="0 0 0"/>
+    <axis xyz="1.000000 0 0"/>
+    <limit lower="-0.050000" upper="2.600000" effort="0.18" velocity="6.0"/>
+    <mimic joint="little_pip" multiplier="1.3812" offset="0"/>
+  </joint>
+  <joint name="thumb_mount" type="fixed">
+    <parent link="palm_link"/>
+    <child link="thumb_base_link"/>
+    <origin xyz="-0.014813 -0.014398 -0.012667" rpy="0 0 0"/>
+  </joint>
+  <joint name="thumb_cmc" type="revolute">
+    <parent link="thumb_base_link"/>
+    <child link="thumb_cmc_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 -0.500000 0.866025"/>
+    <limit lower="-1.200000" upper="1.200000" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="thumb_mcp" type="revolute">
+    <parent link="thumb_cmc_link"/>
+    <child link="thumb_mcp_link"/>
+    <origin xyz="-0.018630 0.003752 0.007584" rpy="0 0 0"/>
+    <axis xyz="0.452250 0.772401 0.445946"/>
+    <limit lower="0.000000" upper="1.745329" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="thumb_pip" type="revolute">
+    <parent link="thumb_mcp_link"/>
+    <child link="thumb_pip_link"/>
+    <origin xyz="-0.040674 0.014457 0.015969" rpy="0 0 0"/>
+    <axis xyz="0.452250 0.772401 0.445946"/>
+    <limit lower="-1.745329" upper="1.745329" effort="0.18" velocity="6.0"/>
+  </joint>
+  <joint name="thumb_dip" type="revolute">
+    <parent link="thumb_pip_link"/>
+    <child link="thumb_dip_link"/>
+    <origin xyz="-0.006008 -0.012652 0.028006" rpy="0 0 0"/>
+    <axis xyz="0.452250 0.772401 0.445946"/>
+    <limit lower="0.000000" upper="1.745329" effort="0.18" velocity="6.0"/>
+  </joint>
+</robot>
