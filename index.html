@@ -41,7 +41,7 @@
   body.skip .intro-screen { display: none; } body.skip .page-body { animation-delay: 0s; animation-duration: .5s; }
   @keyframes lineIn { to { opacity: 1; transform: none; } }
   @keyframes introOut { to { opacity: 0; visibility: hidden; } }
-  @media (prefers-reduced-motion: reduce) { .intro-screen { display: none; } .page-body { opacity: 1; transform: none; animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .intro-screen p, .page-body { transform: none; } }
   @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .ways { grid-template-columns: 1fr; } .item { grid-template-columns: 1fr; gap: 6px; } }
 </style>
 </head>
