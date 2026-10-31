@@ -1,6 +1,6 @@
-# 윤태환 프로젝트 데모
+# 윤태환 Taehwan Yoon
 
-Toss Place Device Software Engineer (Android) 지원 포트폴리오의 부록입니다. 포트폴리오의 프로젝트를 브라우저에서 직접 움직여 볼 수 있게 모았습니다.
+직접 만든 기기를 소프트웨어로 움직여 온 프로젝트들을 브라우저에서 움직여 볼 수 있게 모은 페이지입니다.
 
 - RAGTAL: 리더암과 RB10 협동로봇 연동 3D 뷰어
 - Handling Hand: 16자유도 로봇핸드 3D 뷰어
