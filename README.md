@@ -1,4 +1,4 @@
-# 윤태환 Taehwan Yoon
+# 윤태환 Taehwan Yun
 
 CV와 프로젝트 인터랙티브 데모를 모은 개인 페이지입니다.
 
