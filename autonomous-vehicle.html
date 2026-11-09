@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,26 +28,26 @@
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><a class="brand" href="index.html"><i></i>윤태환</a>
+  <div class="top"><a class="brand" href="index.html"><i></i>Taehwan Yun</a>
     <nav class="nav"><a href="index.html">← CV</a><a href="teleoperation.html">Teleoperation</a><a href="robotic-hand.html">Robotic Hand</a><a class="on" href="autonomous-vehicle.html">Autonomous Vehicle</a><a href="amet.html">AMET</a></nav></div>
 
-  <div class="eyebrow">Camera-LiDAR Autonomous Driving and Perpendicular Parking on a Modified Ride-On Vehicle | 2026.05 ~ 2026.07 | AI 자율주행 경진대회 SW부문 은상</div>
-  <h1>유아용 전동차를 <em>스스로 달리고 주차하는</em> 자율주행 차량으로</h1>
-  <p class="lead">카메라, LiDAR, 노트북, Arduino를 달아 차선 주행부터 수직 주차까지 해낸 차량입니다. 실측 크기로 옮긴 대회 트랙 위에서 두 미션을 재생해 볼 수 있습니다.</p>
-  <div class="chips"><span class="chip on">영상 인식, 판단 로직</span><span class="chip on">시뮬레이션 검증</span><span class="chip">5인 팀</span><span class="chip">GPU 없는 노트북 CPU</span></div>
+  <div class="eyebrow">Camera-LiDAR Autonomous Driving and Perpendicular Parking on a Modified Ride-On Vehicle | 2026.05 ~ 2026.07 | Silver Prize, SKKU AI Autonomous Driving Competition, Software Division</div>
+  <h1>A ride-on toy car that <em>drives and parks itself</em></h1>
+  <p class="lead">Fitted with a camera, a LiDAR, a laptop, and an Arduino, the car completed missions from lane driving to perpendicular parking. Replay both missions on a true-scale model of the competition track.</p>
+  <div class="chips"><span class="chip on">Visual perception, decision logic</span><span class="chip on">Simulation validation</span><span class="chip">Team of 5</span><span class="chip">Laptop CPU, no GPU</span></div>
 
   <div class="stage" id="stage">
-    <div class="modes"><button id="m-drive" class="on">맵 주행</button><button id="m-park">수직 주차</button></div>
+    <div class="modes"><button id="m-drive" class="on">Lane driving</button><button id="m-park">Perpendicular parking</button></div>
     <div class="phase" id="phase"></div>
-    <div class="ctl"><button id="follow" class="on">차량 따라가기</button><button id="restart">처음부터</button><span class="badge">매크로 재생, 실제 추론 아님 | 대회 트랙 실측 15.1 x 10.4 m</span></div>
+    <div class="ctl"><button id="follow" class="on">Follow car</button><button id="restart">Restart</button><span class="badge">Scripted replay, not live inference | Track measured at 15.1 x 10.4 m</span></div>
     <span class="insetlbl" id="lbl1"></span><span class="insetlbl" id="lbl2"></span>
   </div>
 
   <div class="explain">
-    <div class="ex"><b>맵 주행: 화면에서 차선을 찾고, 위에서 본 시점으로 펴서 조향 계산</b><p>전방 카메라 영상에서 차선을 분할하고, 관심 영역만 잘라 버드아이뷰로 펴서 차선 중심을 따라가도록 목표 조향각을 정했습니다. 연산은 GPU 없는 노트북 CPU에서 돌렸습니다.</p></div>
-    <div class="ex"><b>수직 주차: 주차선을 차선처럼 보이게 바꿔 기존 차선 모델 재활용</b><p>후방 카메라의 주차선 화면을 회색으로 채우고 노면 질감 노이즈를 더해, 차선 주행 데이터와 비슷한 입력으로 바꿨습니다. 새 모델을 학습하지 않고 차선 인식 모델을 그대로 써서 주차선을 맞췄습니다.</p></div>
+    <div class="ex"><b>Lane driving: segment the lane, warp to a bird's-eye view, compute steering</b><p>The lane is segmented in the front camera image, and a cropped region of interest is warped to a bird's-eye view to set the target steering angle along the lane center. Everything ran on a laptop CPU without a GPU.</p></div>
+    <div class="ex"><b>Perpendicular parking: make parking lines look like lanes and reuse the lane model</b><p>The rear camera view of the parking lines is filled with gray and given road-texture noise so that it resembles lane-driving data. The existing lane model fits the parking lines with no new training.</p></div>
   </div>
-  <footer>© 2026 윤태환</footer>
+  <footer>© 2026 Taehwan Yun</footer>
 </div>
 
 <script type="module">
@@ -184,8 +184,8 @@ function setMode(m) {
   document.getElementById('m-park').classList.toggle('on', m === 'park');
   trail.visible = m === 'drive'; parkGroup.visible = m === 'park';
   phaseEl.style.display = m === 'park' ? 'block' : 'none';
-  lbl1.textContent = m === 'drive' ? '전방 카메라 (실차 위치, 각도)' : '후방 카메라';
-  lbl2.textContent = m === 'drive' ? '버드아이뷰로 편 차선' : '차선 모델 입력: 회색 채움 + 노이즈';
+  lbl1.textContent = m === 'drive' ? 'Front camera (real mounting pose)' : 'Rear camera';
+  lbl2.textContent = m === 'drive' ? 'Bird\'s-eye view of the lane' : 'Lane model input: gray fill + noise';
   if (m === 'park') { cam.position.set(1.4, 5.5, 3.2); controls.target.set(1.6, 0.4, 0); }
 }
 document.getElementById('m-drive').onclick = () => setMode('drive');
@@ -233,7 +233,7 @@ renderer.setAnimationLoop(() => {
     if (idx < park.path.length - 1) idx = Math.min(park.path.length - 1, idx + Math.round(dt * 100 * 1.5));
     else if ((hold += dt) > 2.5) { idx = 0; hold = 0; }
     const q = park.path[idx]; yaw = q.yaw; placeCar(q.x, q.y, q.yaw, q.d);
-    phaseEl.textContent = idx < park.approachEnd ? '1. 주차 공간 탐색, LiDAR로 주차된 차 두 대 확인' : idx < park.swingEnd ? '2. 앞으로 크게 돌아 나가기' : idx < park.path.length - 1 ? '3. 후진하며 후방 카메라로 주차선 정렬' : '주차 완료';
+    phaseEl.textContent = idx < park.approachEnd ? '1. Search for a space, detect two parked cars with LiDAR' : idx < park.swingEnd ? '2. Swing out forward' : idx < park.path.length - 1 ? '3. Reverse and align with the rear camera' : 'Parked';
   }
   attachCams(yaw);
   if (follow) {

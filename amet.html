@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AMET 주행 라벨</title>
+<title>AMET 2026 Driving Labels</title>
 <link rel="stylesheet" href="assets/site.css">
 <style>
   .player { margin-top: 28px; border-radius: 24px; overflow: hidden; background: #000; border: 1px solid var(--line); position: relative; }
@@ -24,33 +24,33 @@
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><a class="brand" href="index.html"><i></i>윤태환</a>
+  <div class="top"><a class="brand" href="index.html"><i></i>Taehwan Yun</a>
     <nav class="nav"><a href="index.html">← CV</a><a href="teleoperation.html">Teleoperation</a><a href="robotic-hand.html">Robotic Hand</a><a href="autonomous-vehicle.html">Autonomous Vehicle</a><a class="on" href="amet.html">AMET</a></nav></div>
 
-  <div class="eyebrow">AMET 2026 자율주행 해커톤 | 무박 2일 | 최우수상, 본선 2위</div>
-  <h1>정답 조향이 없던 주행 영상에 <em>한 장씩 갈 길을 그려 넣은</em> 학습 데이터</h1>
-  <p class="lead">카메라가 낮아 급커브에서 차선이 화면 밖으로 사라지자, 화면에서 바로 조향을 배우는 End-to-End 모델로 전환했습니다. 학습에 쓸 올바른 조향 값이 없어서 웹 라벨링 도구를 만들고, 실제 주행 프레임마다 가야 할 방향과 속도를 직접 지정했습니다. 아래 영상은 그 라벨을 실제 프레임 위에 이어 붙인 것입니다.</p>
-  <div class="chips"><span class="chip on">End-to-End 모델</span><span class="chip on">웹 라벨링 도구</span><span class="chip">Raspberry Pi 5 온디바이스 추론</span><span class="chip">팀 배포</span></div>
+  <div class="eyebrow">AMET 2026 Autonomous Driving Hackathon | 2 days nonstop | Top Excellence Award, 2nd place in the finals</div>
+  <h1>Training data made by <em>specifying the path on every frame</em> of driving video</h1>
+  <p class="lead">The low camera lost the lane in sharp curves, so we switched to an end-to-end model that learns steering directly from images. With no reliable steering values to train on, I built a web labeling tool and specified the direction and speed on each real driving frame. The videos below show those labels on the real frames.</p>
+  <div class="chips"><span class="chip on">End-to-end model</span><span class="chip on">Web labeling tool</span><span class="chip">On-device inference on Raspberry Pi 5</span><span class="chip">Deployed to the team</span></div>
 
   <div class="tabs2" id="tabs"></div>
   <div class="player"><video id="vid" controls muted loop playsinline autoplay></video></div>
   <div class="legend">
-    <div class="lg"><b>화살표 방향 = 조향</b>왼쪽으로 기울수록 왼쪽 조향입니다. 최대 0.35 rad까지 지정했습니다.</div>
-    <div class="lg"><b>화살표 길이 = 속도</b>급커브와 장애물 앞에서는 짧게, 직선에서는 길게 지정했습니다.</div>
-    <div class="lg"><b>아래 그래프 = 전체 구간</b>세션 전체의 조향 변화입니다. 붉은 줄은 장애물이 있는 구간입니다.</div>
+    <div class="lg"><b>Arrow direction = steering</b>Tilting left means steering left, up to 0.35 rad.</div>
+    <div class="lg"><b>Arrow length = speed</b>Short before sharp curves and obstacles, long on straights.</div>
+    <div class="lg"><b>Bottom plot = full session</b>Steering over the whole session. Red bands mark obstacle sections.</div>
   </div>
-  <p class="note">관중과 후원사 현수막이 보이는 화면 윗부분은 흐리게 처리했습니다.</p>
+  <p class="note">The top of the frame is blurred to hide spectators and sponsor banners.</p>
 
-  <h2>라벨링 도구와 시뮬레이터</h2>
-  <p class="sec-sub">드래그 한 번으로 방향과 속도를 함께 지정하는 도구를 HTML로 만들고, 대회 중반부터 팀원 모두가 같이 썼습니다. 대회 전에는 시뮬레이터에서 차선을 자동 라벨링해 인코더를 미리 학습했습니다.</p>
+  <h2>Labeling Tool and Simulator</h2>
+  <p class="sec-sub">I built an HTML tool that sets direction and speed in one drag, and the whole team used it from the middle of the competition. Before the event, lanes were auto-labeled in a simulator to pretrain the encoder.</p>
   <div class="split">
-    <div class="shot"><img src="assets/amet/label_tool.jpg" alt="조향과 속도 라벨링 도구 화면"><div class="cap">조향 + 속도 라벨러<span>드래그 방향이 조향, 길이가 속도. 이전 값 복사와 구간 보간 단축키</span></div></div>
-    <div class="shot"><video src="assets/amet/simulator.mp4" muted loop playsinline autoplay controls></video><div class="cap">대회 전 시뮬레이터<span>맵의 차선을 화면에 투영해 자동 라벨 생성</span></div></div>
+    <div class="shot"><img src="assets/amet/label_tool.jpg" alt="Steering and speed labeling tool"><div class="cap">Steering and speed labeler<span>Drag direction sets steering, length sets speed, with shortcuts to copy and interpolate</span></div></div>
+    <div class="shot"><video src="assets/amet/simulator.mp4" muted loop playsinline autoplay controls></video><div class="cap">Pre-competition simulator<span>Map lanes are projected into the image to generate labels</span></div></div>
   </div>
-  <footer>© 2026 윤태환</footer>
+  <footer>© 2026 Taehwan Yun</footer>
 </div>
 <script>
-  const S = [['labels_151329', '헤어핀과 장애물 구간'], ['labels_122727', '급커브 연속 구간']];
+  const S = [['labels_151329', 'Hairpin and obstacle section'], ['labels_122727', 'Consecutive sharp curves']];
   const tabs = document.getElementById('tabs'), vid = document.getElementById('vid');
   S.forEach(([f, t], i) => {
     const b = document.createElement('button'); b.textContent = t;

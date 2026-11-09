@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,29 +29,29 @@
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><a class="brand" href="index.html"><i></i>윤태환</a>
+  <div class="top"><a class="brand" href="index.html"><i></i>Taehwan Yun</a>
     <nav class="nav"><a href="index.html">← CV</a><a class="on" href="teleoperation.html">Teleoperation</a><a href="robotic-hand.html">Robotic Hand</a><a href="autonomous-vehicle.html">Autonomous Vehicle</a><a href="amet.html">AMET</a></nav></div>
 
-  <div class="eyebrow">Force-Reflecting Teleoperation with a Half-Scale Kinematic Replica of a 6-DoF Collaborative Robot | 2025.05 ~ 2025.10 | 창의혁신 DNA 산학협력 대상</div>
-  <h1>리더암을 움직이면 <em>협동로봇이 그대로 따라오는</em> 원격조작</h1>
-  <p class="lead">6축 협동로봇 RB10을 0.5배로 축소한 리더암을 설계해, 같은 관절 각도로 로봇을 조종하고 로봇이 받은 외력을 조작자 손에 되돌려 줍니다. 왼쪽 리더암의 관절을 드래그하거나 슬라이더를 움직여 보세요.</p>
-  <div class="chips"><span class="chip on">프로젝트 리더</span><span class="chip on">HW 4명, SW 4명 총괄</span><span class="chip">같은 기구학의 0.5배 리더암</span><span class="chip">힘-토크 센서 피드백</span></div>
+  <div class="eyebrow">Force-Reflecting Teleoperation with a Half-Scale Kinematic Replica of a 6-DoF Collaborative Robot | 2025.05 ~ 2025.10 | Grand Prize, Creative Innovation DNA Industry-Academia Collaboration</div>
+  <h1>Move the leader arm and <em>the collaborative robot follows</em></h1>
+  <p class="lead">A 0.5x leader arm with the same kinematics as the 6-DoF RB10 commands the robot joint by joint and reflects the external force on the robot back to the operator's hand. Drag a joint of the leader arm on the left, or use the sliders.</p>
+  <div class="chips"><span class="chip on">Project Lead</span><span class="chip on">4 HW and 4 SW members</span><span class="chip">0.5x leader arm, same kinematics</span><span class="chip">Force-torque sensor feedback</span></div>
 
   <div class="stage" id="stage">
-    <div class="labels"><span class="pill">리더암 (0.5배)</span><span class="pill">RB10 협동로봇</span><span class="pill force" id="force">작업대 접촉, 외력 피드백</span></div>
+    <div class="labels"><span class="pill">Leader arm (0.5x)</span><span class="pill">RB10 collaborative robot</span><span class="pill force" id="force">Contact, force feedback</span></div>
     <div class="panel">
-      <h3>리더암 관절 각도</h3>
+      <h3>Leader arm joint angles</h3>
       <div id="sliders"></div>
-      <div class="btns"><button class="pri" id="play">시연 재생</button><button id="home">초기 자세</button></div>
+      <div class="btns"><button class="pri" id="play">Play demo</button><button id="home">Home pose</button></div>
     </div>
-    <div class="hint">리더암 링크를 드래그해 관절 회전, 빈 곳을 드래그해 시점 회전</div>
+    <div class="hint">Drag a leader arm link to rotate its joint, drag empty space to orbit</div>
   </div>
-  <p class="note">RB10 형상은 제조사 CAD를 변환해 사용했고, 리더암은 실제 기구학 구조를 단순화한 모델입니다. 접촉 시 힘 표시는 동작 원리를 보여 주기 위한 연출입니다.</p>
+  <p class="note">The RB10 geometry is converted from the manufacturer's CAD. The leader arm is a simplified model of the real kinematic structure. The force arrows on contact are an illustration of the principle.</p>
 
-  <h2>실제 영상</h2>
-  <p class="sec-sub">리더암으로 수집한 시연으로 학습한 로봇이 Pick &amp; Place 작업을 혼자 수행했고, 10회 중 9회 성공했습니다.</p>
+  <h2>Real Footage</h2>
+  <p class="sec-sub">A policy trained on demonstrations collected with the leader arm performed a pick-and-place task autonomously, succeeding in 9 of 10 trials.</p>
   <div class="videos" id="videos"></div>
-  <footer>© 2026 윤태환</footer>
+  <footer>© 2026 Taehwan Yun</footer>
 </div>
 
 <script type="module">
@@ -212,8 +212,8 @@ function highlight(j) {
 // ---------- demo macro ----------
 const KEYS = [HOME, [-10, -15, 82, 45, 0, 0], [-10, -15, 96, 45, 0, 0], [-10, -15, 80, 45, 0, 0], [-45, -15, 85, 25, 0, 45], [-45, -15, 106, 45, 0, 90], [-45, -15, 85, 30, 0, 90], HOME];
 let play = null;
-function stopPlay() { play = null; document.getElementById('play').textContent = '시연 재생'; }
-document.getElementById('play').onclick = () => { if (play) return stopPlay(); play = { t: 0 }; document.getElementById('play').textContent = '정지'; };
+function stopPlay() { play = null; document.getElementById('play').textContent = 'Play demo'; }
+document.getElementById('play').onclick = () => { if (play) return stopPlay(); play = { t: 0 }; document.getElementById('play').textContent = 'Stop'; };
 document.getElementById('home').onclick = () => { stopPlay(); HOME.forEach((v, i) => qLead[i] = v); };
 
 // ---------- force cue ----------
@@ -230,9 +230,9 @@ function tipOf(pivots, root) {
 
 // ---------- videos ----------
 const VIDS = [
-  ['assets/ragtal/rollout.mp4', '학습한 로봇의 자율 수행', '리더암으로 모은 시연으로 학습, Pick & Place 10회 중 9회 성공'],
-  ['assets/ragtal/teleop.mp4', '리더암 원격조작', '리더암과 협동로봇이 같은 관절 각도로 움직임'],
-  ['assets/ragtal/gravity.mp4', '리더암 중력 보상', '손을 떼도 리더암이 자세를 유지'],
+  ['assets/ragtal/rollout.mp4', 'Autonomous policy rollout', 'Trained on leader-arm demonstrations, 9 of 10 pick-and-place trials succeeded'],
+  ['assets/ragtal/teleop.mp4', 'Leader-arm teleoperation', 'The leader arm and the robot move at the same joint angles'],
+  ['assets/ragtal/gravity.mp4', 'Leader-arm gravity compensation', 'The arm holds its pose after the hand lets go'],
 ];
 const vbox = document.getElementById('videos');
 VIDS.forEach(([src, t, s]) => {

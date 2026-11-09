@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,34 +33,34 @@
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><a class="brand" href="index.html"><i></i>윤태환</a>
+  <div class="top"><a class="brand" href="index.html"><i></i>Taehwan Yun</a>
     <nav class="nav"><a href="index.html">← CV</a><a href="teleoperation.html">Teleoperation</a><a class="on" href="robotic-hand.html">Robotic Hand</a><a href="autonomous-vehicle.html">Autonomous Vehicle</a><a href="amet.html">AMET</a></nav></div>
 
-  <div class="eyebrow">16-DoF Modular Robotic Hand with Linkage-Coupled Fingers and Passive Compliant Fingertips | 2026.05 ~ 2026.09 | 대한기계학회 전국학생설계경진대회 동상</div>
-  <h1>서보 16개로 움직이는 <em>16자유도 로봇핸드</em></h1>
-  <p class="lead">시판 서보의 하우징만 벗겨 관절마다 넣고, 손끝 관절은 중간 관절에 링크로 연동했습니다. 자세 버튼을 누르거나 손가락별 슬라이더를 움직여 보세요. 손끝 관절은 따로 움직이지 않아도 링크로 따라 굽습니다.</p>
-  <div class="chips"><span class="chip on">ESP32 펌웨어</span><span class="chip on">전원 배선</span><span class="chip on">시뮬레이션 검증</span><span class="chip">3인 팀</span></div>
+  <div class="eyebrow">16-DoF Modular Robotic Hand with Linkage-Coupled Fingers and Passive Compliant Fingertips | 2026.05 ~ 2026.09 | Bronze Prize, KSME National Student Design Competition</div>
+  <h1>A <em>16-DoF robotic hand</em> driven by 16 servos</h1>
+  <p class="lead">Off-the-shelf servos with their housings removed sit inside each joint, and the fingertip joint is coupled to the middle joint through a linkage. Try the pose buttons or the per-finger sliders. The fingertip joint follows through the linkage without its own actuator.</p>
+  <div class="chips"><span class="chip on">ESP32 firmware</span><span class="chip on">Power wiring</span><span class="chip on">Simulation validation</span><span class="chip">Team of 3</span></div>
 
   <div class="stage" id="stage">
-    <div class="callout" id="callout">파랑: 중간 관절이 굽으면 손끝 관절을 따라 굽히는 연동 링크와 손끝 마디</div>
+    <div class="callout" id="callout">Blue: the coupling linkage and fingertip link that follow the middle joint</div>
     <div class="panel">
-      <h3>자세</h3>
+      <h3>Poses</h3>
       <div class="seg" id="poses"></div>
-      <h3>손가락별 관절</h3>
+      <h3>Finger joints</h3>
       <div class="seg" id="fingers"></div>
       <div id="sliders"></div>
-      <label class="toggle"><input type="checkbox" id="link">손끝 연동 링크 강조</label>
+      <label class="toggle"><input type="checkbox" id="link">Highlight fingertip linkage</label>
     </div>
     <div class="facts">
-      <div class="fact"><b>16</b>자유도</div><div class="fact"><b>16</b>서보</div><div class="fact"><b>20</b>관절</div><div class="fact"><b>약 9만 원</b>부품비</div>
+      <div class="fact"><b>16</b>DoF</div><div class="fact"><b>16</b>Servos</div><div class="fact"><b>20</b>Joints</div><div class="fact"><b>~90,000 KRW</b>Parts cost</div>
     </div>
   </div>
-  <p class="note">팀 설계 CAD로 만든 실제 치수 모델입니다. 기본 자세는 설계 단계에서 간섭 없이 풀어 둔 값입니다.</p>
+  <p class="note">A true-scale model built from the team's CAD. The preset poses were solved at the design stage to avoid interference.</p>
 
-  <h2>실제 동작</h2>
-  <p class="sec-sub">협동로봇 끝에 달아 켜진 전구를 돌려 빼고, 얇은 마커까지 손끝으로 집었습니다.</p>
+  <h2>Real Footage</h2>
+  <p class="sec-sub">Mounted on a collaborative robot, the hand unscrews a lit bulb and picks up a thin marker with its fingertips.</p>
   <div class="videos" id="videos"></div>
-  <footer>© 2026 윤태환</footer>
+  <footer>© 2026 Taehwan Yun</footer>
 </div>
 
 <script type="module">
@@ -111,8 +111,8 @@ controls.target.copy(c); robot.position.sub(new THREE.Vector3(0, 0, 0));
 const J = Object.fromEntries(meta.joints.filter(j => !j.mimic).map(j => [j.name, j]));
 const q = Object.fromEntries(Object.keys(J).map(n => [n, 0]));
 const target = { ...q };
-const FINGERS = { thumb: '엄지', index: '검지', middle: '중지', ring: '약지', little: '소지' };
-const ROLE = { abd: '벌림', mcp: '뿌리', pip: '중간', cmc: '회전', dip: '끝' };
+const FINGERS = { thumb: 'Thumb', index: 'Index', middle: 'Middle', ring: 'Ring', little: 'Little' };
+const ROLE = { abd: 'ABD', mcp: 'MCP', pip: 'PIP', cmc: 'CMC', dip: 'DIP' };
 let finger = 'index';
 const fbox = document.getElementById('fingers'), sbox = document.getElementById('sliders');
 Object.entries(FINGERS).forEach(([k, label]) => {
@@ -137,7 +137,7 @@ function refreshSliders() { sbox.querySelectorAll('input').forEach(i => { i.valu
 drawSliders();
 
 // ---------- poses and animations ----------
-const POSES = { '펼침': 'open', '주먹': 'closed', '집기': 'pinch', '벌리기': 'spread' };
+const POSES = { 'Open': 'open', 'Power grasp': 'closed', 'Pinch': 'pinch', 'Spread': 'spread' };
 const pbox = document.getElementById('poses');
 let anim = null;
 function stopAnim() { anim = null; pbox.querySelectorAll('button').forEach(b => b.classList.remove('on')); }
@@ -147,7 +147,7 @@ Object.entries(POSES).forEach(([label, key]) => {
   b.onclick = () => { stopAnim(); setPose(key); b.classList.add('on'); };
   pbox.append(b);
 });
-const wave = document.createElement('button'); wave.textContent = '손가락 파도';
+const wave = document.createElement('button'); wave.textContent = 'Finger wave';
 wave.onclick = () => { stopAnim(); anim = { t: 0 }; wave.classList.add('on'); };
 pbox.append(wave);
 
@@ -159,7 +159,7 @@ document.getElementById('link').onchange = e => {
 };
 
 // ---------- videos ----------
-const VIDS = [['bulb_full_8x', '켜진 전구 돌려 빼기', '협동로봇에 달아 원격조작, 8배속'], ['pinch_marker', '얇은 마커 집기', '손끝 탄성 관절이 꺾이며 표면에 붙음'], ['full_pick_throw_close', '집어서 던지기', '빠른 파지와 놓기'], ['eraser_wipe', '지우개로 닦기', '쥔 채로 힘을 주며 이동']];
+const VIDS = [['bulb_full_8x', 'Unscrewing a lit bulb', 'Teleoperated on a collaborative robot, 8x speed'], ['pinch_marker', 'Picking up a thin marker', 'The compliant fingertips bend against the surface'], ['full_pick_throw_close', 'Pick and throw', 'Fast grasp and release'], ['eraser_wipe', 'Wiping with an eraser', 'Moving while pressing with a held object']];
 const vbox = document.getElementById('videos');
 VIDS.forEach(([f, t, s]) => {
   const d = document.createElement('div'); d.className = 'vcard';
