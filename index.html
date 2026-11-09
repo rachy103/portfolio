@@ -6,90 +6,103 @@
 <title>윤태환 Taehwan Yoon</title>
 <link rel="stylesheet" href="assets/site.css">
 <style>
-  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; padding: 48px 0 24px; }
-  .hello { font-size: 15px; font-weight: 700; color: var(--blue); }
-  .name { font-size: clamp(40px, 6vw, 64px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.05; margin-top: 10px; }
-  .name small { display: block; font-size: 18px; font-weight: 600; color: var(--g500); letter-spacing: 0; margin-top: 10px; }
-  .intro { font-size: 18px; line-height: 1.7; color: var(--sub); margin-top: 22px; }
-  .intro b { color: var(--fg); font-weight: 700; }
-  .meta { display: flex; gap: 26px; flex-wrap: wrap; margin-top: 24px; font-size: 13.5px; color: var(--sub); }
-  .meta b { display: block; color: var(--fg); font-weight: 700; font-size: 14px; }
-  .mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; aspect-ratio: 1 / 1; }
-  .mosaic a { position: relative; border-radius: 20px; overflow: hidden; background: #0e1116; }
-  .mosaic video, .mosaic img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
-  .mosaic a:hover video, .mosaic a:hover img { transform: scale(1.04); }
-  .mosaic span { position: absolute; left: 10px; bottom: 10px; font-size: 12px; font-weight: 700; color: #fff; background: rgba(25,31,40,.72); padding: 5px 10px; border-radius: 999px; }
-  .ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .way { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 20px; }
-  .way i { font-style: normal; font-size: 13px; font-weight: 800; color: var(--blue); }
-  .way b { display: block; font-size: 17px; font-weight: 800; margin-top: 8px; letter-spacing: -0.03em; }
-  .way p { font-size: 14px; color: var(--sub); line-height: 1.6; margin-top: 8px; }
-  .list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
-  .item { display: grid; grid-template-columns: 200px 1fr auto; gap: 18px; align-items: center; padding: 20px 4px; border-bottom: 1px solid var(--line); }
-  .item .k { font-size: 13px; color: var(--g500); font-weight: 600; }
-  .item .t { font-size: 18px; font-weight: 800; letter-spacing: -0.03em; }
-  .item .s { font-size: 14px; color: var(--sub); margin-top: 4px; line-height: 1.55; }
-  .item .go { font-size: 13px; font-weight: 700; color: var(--blue); white-space: nowrap; }
-  .item.plain .go { color: var(--g500); }
-  a.item:hover .t { color: var(--blue); }
-  .intro-screen { position: fixed; inset: 0; z-index: 50; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; cursor: pointer; animation: introOut .8s ease 3.4s forwards; }
-  .intro-screen p { font-size: clamp(30px, 5.5vw, 56px); font-weight: 800; letter-spacing: -0.045em; opacity: 0; transform: translateY(14px); animation: lineIn .9s cubic-bezier(.2,.7,.2,1) forwards; }
-  .intro-screen p:nth-child(1) { animation-delay: .35s; }
-  .intro-screen p:nth-child(2) { animation-delay: 1.35s; }
-  .intro-screen p em { font-style: normal; color: var(--blue); }
-  .page-body { opacity: 0; transform: translateY(18px); animation: lineIn 1s cubic-bezier(.2,.7,.2,1) 3.7s forwards; }
-  body.skip .intro-screen { display: none; } body.skip .page-body { animation-delay: 0s; animation-duration: .5s; }
-  @keyframes lineIn { to { opacity: 1; transform: none; } }
-  @keyframes introOut { to { opacity: 0; visibility: hidden; } }
-  @media (prefers-reduced-motion: reduce) { .intro-screen p, .page-body { transform: none; } }
-  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .ways { grid-template-columns: 1fr; } .item { grid-template-columns: 1fr; gap: 6px; } }
+  .wrap.cv { max-width: 920px; }
+  .profile { display: grid; grid-template-columns: 150px 1fr; gap: 32px; align-items: center; padding: 36px 0 32px; border-bottom: 1px solid var(--line); }
+  .profile img { width: 150px; height: 200px; object-fit: cover; border-radius: 14px; display: block; }
+  .pname { font-size: 36px; font-weight: 800; letter-spacing: -0.04em; }
+  .pname small { font-size: 17px; font-weight: 600; color: var(--g500); letter-spacing: 0; margin-left: 10px; }
+  .ptitle { font-size: 16px; font-weight: 600; margin-top: 8px; }
+  .pdesc { font-size: 15px; line-height: 1.65; color: var(--sub); margin-top: 8px; }
+  .cta { display: inline-block; margin-top: 16px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 700; padding: 10px 16px; border-radius: 10px; }
+  section.block { padding: 30px 0 4px; }
+  section.block > h2 { margin: 0 0 12px; font-size: 18px; }
+  .r { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 9px 0; font-size: 14.5px; line-height: 1.55; }
+  .r .d { color: var(--g500); font-weight: 600; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+  .r b { font-weight: 700; }
+  .r span.s { display: block; color: var(--sub); font-size: 13.5px; margin-top: 2px; }
+  .r a { color: var(--blue); font-weight: 700; font-size: 13px; margin-left: 6px; white-space: nowrap; }
+  .demos { background: var(--soft); border-top: 1px solid var(--line); margin-top: 40px; padding: 44px 0 16px; }
+  .demos h2 { margin: 0; font-size: 24px; }
+  .demo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 20px; }
+  .demo { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: border-color .15s; }
+  .demo:hover { border-color: var(--blue); }
+  .demo .thumb { aspect-ratio: 16 / 8; background: #0e1116 center / cover no-repeat; }
+  .demo .b { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
+  .demo .type { font-size: 12px; font-weight: 700; color: var(--blue); }
+  .demo .t { font-size: 17px; font-weight: 800; margin-top: 4px; letter-spacing: -0.03em; }
+  .demo .s { font-size: 13.5px; color: var(--sub); line-height: 1.55; margin-top: 6px; flex: 1; }
+  .demo .open { margin-top: 14px; text-align: center; background: var(--blue); color: #fff; font-size: 14px; font-weight: 700; padding: 10px 0; border-radius: 10px; }
+  @media (max-width: 680px) { .profile { grid-template-columns: 1fr; } .r { grid-template-columns: 1fr; gap: 2px; } .demo-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-<div class="intro-screen" id="introScreen"><p>안녕하세요</p><p>지원자 <em>윤태환</em>입니다</p></div>
-<div class="wrap page-body">
+<div class="wrap cv">
   <div class="top"><span class="brand"><i></i>윤태환</span>
-    <nav class="nav"><a href="ragtal.html">RAGTAL</a><a href="hand.html">Handling Hand</a><a href="ctrlzero.html">Ctrl-Zero</a><a href="amet.html">AMET</a></nav></div>
+    <nav class="nav"><a class="on" href="#">CV</a><a href="#demos">인터랙티브 데모</a></nav></div>
 
-  <section class="hero">
+  <header class="profile">
+    <img src="assets/profile.jpg" alt="윤태환 증명사진">
     <div>
-      <div class="hello">안녕하세요</div>
-      <div class="name">윤태환<small>Taehwan Yoon</small></div>
-      <p class="intro">기계공학을 공부하면서 <b>직접 만든 기기를 소프트웨어로 움직이는 일</b>을 가장 좋아하게 됐습니다. 로봇팔을 원격으로 조종하는 장치, 손가락 하나하나에 서보를 넣은 로봇핸드, 유아용 전동차를 개조한 자율주행 차량까지, 손에 잡히는 결과물이 실제로 움직일 때까지 회로와 펌웨어, 영상 인식을 오가며 만들어 왔습니다.</p>
-      <div class="meta">
-        <div><b>성균관대학교 기계공학</b>2027.02 졸업 예정</div>
-        <div><b>Robotics Innovatory</b>학부연구생 2025.05 ~ 2026.09</div>
-        <div><b>수상 5회</b>2025 ~ 2026 대회와 공모전</div>
-      </div>
+      <div class="pname">윤태환<small>Taehwan Yoon</small></div>
+      <div class="ptitle">성균관대학교 기계공학 | 로봇 조작, 자율주행</div>
+      <p class="pdesc">원격조작 장치와 로봇핸드를 직접 설계하고 제작했으며, 사람 손 영상으로 로봇 학습 데이터를 만드는 연구에 참여했습니다.</p>
+      <a class="cta" href="#demos">프로젝트 인터랙티브 데모 보기 ↓</a>
     </div>
-    <div class="mosaic">
-      <a href="ragtal.html"><video src="assets/ragtal/teleop.mp4" poster="assets/ragtal/teleop.jpg" autoplay muted loop playsinline></video><span>RAGTAL</span></a>
-      <a href="hand.html"><video src="assets/hand/pinch_marker.mp4" poster="assets/hand/pinch_marker.jpg" autoplay muted loop playsinline></video><span>Handling Hand</span></a>
-      <a href="ctrlzero.html"><img src="assets/ctrlzero/track.jpg" alt="Ctrl-Zero 대회 트랙"><span>Ctrl-Zero</span></a>
-      <a href="amet.html"><video src="assets/amet/labels_151329.mp4" poster="assets/amet/labels_151329.jpg" autoplay muted loop playsinline></video><span>AMET 2026</span></a>
-    </div>
+  </header>
+
+  <section class="block"><h2>학력</h2>
+    <div class="r"><div class="d">2027.02 졸업 예정</div><div><b>성균관대학교 기계공학</b></div></div>
   </section>
 
-  <h2>만들어 온 것들</h2>
-  <p class="sec-sub">이름을 누르면 직접 움직여 볼 수 있는 페이지로 이어집니다.</p>
-  <div class="list">
-    <a class="item" href="ragtal.html"><div class="k">2025.05 ~ 2025.10<br>창의혁신 DNA 산학협력 대상</div><div><div class="t">RAGTAL, 힘이 전해지는 원격조작 장치</div><div class="s">협동로봇을 0.5배로 줄인 리더암을 설계하고, 로봇이 받은 힘을 조작자 손에 되돌려 줬습니다. 8명 팀을 이끌었습니다.</div></div><div class="go">3D로 움직여 보기 →</div></a>
-    <a class="item" href="hand.html"><div class="k">2026.05 ~ 2026.09<br>전국학생설계경진대회 동상</div><div><div class="t">Handling Hand, 16자유도 로봇핸드</div><div class="s">서보 16개를 손가락 관절에 넣고 ESP32 펌웨어로 구동했습니다. 켜진 전구를 돌려 빼고 얇은 마커를 집습니다.</div></div><div class="go">3D로 움직여 보기 →</div></a>
-    <a class="item" href="ctrlzero.html"><div class="k">2026.05 ~ 2026.07<br>AI 자율주행 경진대회 은상</div><div><div class="t">Ctrl-Zero, 전동차를 개조한 자율주행 차량</div><div class="s">카메라와 LiDAR로 차선 주행부터 수직 주차까지 했고, 직진하지 못하던 원인을 조향 연결부의 이격까지 추적했습니다.</div></div><div class="go">주행 재생 →</div></a>
-    <a class="item" href="amet.html"><div class="k">2026<br>자율주행 해커톤 최우수상</div><div><div class="t">AMET 2026, 화면만 보고 조향하는 주행 AI</div><div class="s">무박 2일 동안 End-to-End 모델로 전환하고, 라벨링 도구를 만들어 팀이 함께 학습 데이터를 만들었습니다.</div></div><div class="go">라벨 영상 보기 →</div></a>
-    <div class="item plain"><div class="k">2025.10 ~ 2026.09<br>MDPI Machines 투고, 심사 중</div><div><div class="t">사람 손 영상을 로봇핸드 학습 데이터로</div><div class="s">깊이 카메라로 찍은 사람 손 시연을 3차원으로 복원하고 로봇핸드로 바꿔 합성하는 연구에 참여했습니다.</div></div><div class="go">연구 진행 중</div></div>
-  </div>
+  <section class="block"><h2>연구 경력</h2>
+    <div class="r"><div class="d">2025.05 ~ 2026.09</div><div><b>Robotics Innovatory, 학부연구생</b><span class="s">원격조작 데이터 수집 장치, 사람 손 영상 기반 로봇 시연 생성</span></div></div>
+  </section>
 
-  <h2>이렇게 일합니다</h2>
-  <div class="ways" style="margin-top:16px">
-    <div class="way"><i>01</i><b>원인을 끝까지 따라갑니다</b><p>코드가 맞는데 차가 쏠리면, 차체와 센서를 거쳐 조향 연결부의 작은 틈까지 내려가 봅니다.</p></div>
-    <div class="way"><i>02</i><b>필요한 도구는 직접 만듭니다</b><p>정답 조향이 없을 때는 라벨링 도구를, 시험 시간이 부족할 때는 시뮬레이터를 먼저 만들었습니다.</p></div>
-    <div class="way"><i>03</i><b>함께 끝까지 갑니다</b><p>회로 작업부터 데이터 수집까지 모든 실험에 같이 들어가며 HW와 SW 팀을 이끌었습니다.</p></div>
-  </div>
-  <footer>© 2026 윤태환. 3D 뷰어의 RB10 형상은 제조사 CAD, Handling Hand는 팀 설계 CAD를 바탕으로 했습니다.</footer>
+  <section class="block"><h2>논문과 발표</h2>
+    <div class="r"><div class="d">심사 중</div><div><b>Mesh-Free Dexterous Robot Demonstrations from Human RGB-D Video and Teleoperation</b><span class="s">MDPI Machines 투고, 공저자</span></div></div>
+    <div class="r"><div class="d">게재 예정</div><div><b>Handling Hand 관련 논문</b><span class="s">대한기계학회 논문집 C, 특허 출원 예정</span></div></div>
+    <div class="r"><div class="d">2026.06</div><div><b>창의혁신 DNA 비전캠프 초청 연사</b><span class="s">팀 프로젝트 수행기1, 창의혁신 DNA 연구팀</span></div></div>
+    <div class="r"><div class="d">2026.02</div><div><b>한국로봇종합학술대회</b><span class="s">참여 연구를 지도교수님이 발표</span></div></div>
+    <div class="r"><div class="d">2025</div><div><b>지속가능발전을 위한 대학혁신포럼</b><span class="s">학생성공 사례 발표</span></div></div>
+  </section>
+
+  <section class="block"><h2>프로젝트</h2>
+    <div class="r"><div class="d">2025.05 ~ 2025.10</div><div><b>RAGTAL, 힘 피드백 원격조작 장치</b><a href="ragtal.html">3D 데모 →</a><span class="s">RB10을 0.5배로 축소한 리더암 설계와 외력 피드백 구현, HW 4명과 SW 4명 총괄</span></div></div>
+    <div class="r"><div class="d">2025.10 ~ 2026.09</div><div><b>사람 손 영상 기반 로봇 시연 생성 연구</b><span class="s">손 3차원 복원, 로봇핸드 합성, Amodal Segmentation</span></div></div>
+    <div class="r"><div class="d">2026.05 ~ 2026.09</div><div><b>Handling Hand, 16자유도 로봇핸드</b><a href="hand.html">3D 데모 →</a><span class="s">ESP32 펌웨어, 전원 배선, 시뮬레이션 검증, 탄성 손끝 관절 제안</span></div></div>
+    <div class="r"><div class="d">2026.05 ~ 2026.07</div><div><b>Ctrl-Zero, 전동차 개조 자율주행</b><a href="ctrlzero.html">주행 데모 →</a><span class="s">영상 인식, 판단 로직, 시뮬레이션 검증, 조향 연결부 이격 진단</span></div></div>
+    <div class="r"><div class="d">2026</div><div><b>AMET 2026 자율주행 해커톤</b><a href="amet.html">라벨 영상 →</a><span class="s">End-to-End 주행 모델과 시뮬레이터 담당, Raspberry Pi 5 온디바이스 추론</span></div></div>
+    <div class="r"><div class="d">2026.02 ~</div><div><b>모두의창업, 법령 기반 부동산 판정 서비스</b><span class="s">창업자, 설계와 검증, 1라운드 통과</span></div></div>
+    <div class="r"><div class="d">2025.01 ~ 2025.03</div><div><b>RightSite LLC 프리랜서 용역</b><span class="s">미국 EV 충전소 입지 분석용 지리, 인구통계, 전력회사 데이터 처리</span></div></div>
+  </section>
+
+  <section class="block"><h2>수상</h2>
+    <div class="r"><div class="d">2026.10</div><div>대한기계학회 전국학생설계경진대회 <b>동상</b></div></div>
+    <div class="r"><div class="d">2026</div><div>AMET 2026 자율주행 해커톤 <b>최우수상</b>, 본선 2위</div></div>
+    <div class="r"><div class="d">2026</div><div>제4회 성균관대 AI 자율주행 경진대회 SW부문 <b>은상</b></div></div>
+    <div class="r"><div class="d">2026.01</div><div>제1회 성균관대 자율주행 AI 칩 설계 경진대회 <b>장려상</b></div></div>
+    <div class="r"><div class="d">2025.11</div><div>2025 창의적 종합설계 경진대회 <b>은상</b>, <b>월드클래스기업협회장상</b></div></div>
+    <div class="r"><div class="d">2025</div><div>창의혁신 DNA 산학협력 <b>대상</b></div></div>
+  </section>
+
+  <section class="block"><h2>기술</h2>
+    <div class="r"><div class="d">언어, 도구</div><div>Python, C++, C# (Unity), Linux, Git, MuJoCo</div></div>
+    <div class="r"><div class="d">임베디드</div><div>ESP32, Arduino, Raspberry Pi 5, Ultra96-V2 FPGA, Dynamixel</div></div>
+  </section>
 </div>
-<script>
-  document.getElementById('introScreen').addEventListener('click', () => document.body.classList.add('skip'));
-</script>
+
+<div class="demos" id="demos">
+  <div class="wrap cv">
+    <h2>인터랙티브 데모</h2>
+    <p class="sec-sub" style="margin:6px 0 0">아래 버튼을 누르면 프로젝트별 데모 페이지로 이동합니다.</p>
+    <div class="demo-grid">
+      <a class="demo" href="ragtal.html"><div class="thumb" style="background-image:url(assets/ragtal/teleop.jpg)"></div><div class="b"><div class="type">3D 뷰어</div><div class="t">RAGTAL 원격조작</div><div class="s">리더암 관절을 드래그하면 RB10이 같은 각도로 따라 움직입니다.</div><div class="open">3D 뷰어 열기 →</div></div></a>
+      <a class="demo" href="hand.html"><div class="thumb" style="background-image:url(assets/hand/bulb_full_8x.jpg)"></div><div class="b"><div class="type">3D 뷰어</div><div class="t">Handling Hand</div><div class="s">자세를 바꾸고 손가락별 관절과 손끝 연동 링크를 확인합니다.</div><div class="open">3D 뷰어 열기 →</div></div></a>
+      <a class="demo" href="ctrlzero.html"><div class="thumb" style="background-image:url(assets/ctrlzero/track.jpg)"></div><div class="b"><div class="type">주행 재생</div><div class="t">Ctrl-Zero</div><div class="s">실측 대회 트랙에서 맵 주행과 수직 주차를 차량 시점과 함께 재생합니다.</div><div class="open">주행 재생 열기 →</div></div></a>
+      <a class="demo" href="amet.html"><div class="thumb" style="background-image:url(assets/amet/labels_151329.jpg)"></div><div class="b"><div class="type">영상</div><div class="t">AMET 2026</div><div class="s">실제 주행 프레임마다 지정한 조향과 속도 라벨을 영상으로 봅니다.</div><div class="open">라벨 영상 열기 →</div></div></a>
+    </div>
+    <footer style="padding:40px 0 28px">© 2026 윤태환</footer>
+  </div>
+</div>
 </body>
 </html>
