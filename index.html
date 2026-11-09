@@ -1,36 +1,36 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>윤태환 Taehwan Yun</title>
+<title>Taehwan Yun</title>
 <link rel="stylesheet" href="assets/site.css">
 <style>
   .wrap.cv { max-width: 920px; }
   .profile { display: grid; grid-template-columns: 150px 1fr; gap: 32px; align-items: center; padding: 36px 0 32px; border-bottom: 1px solid var(--line); }
   .profile img { width: 150px; height: 200px; object-fit: cover; border-radius: 14px; display: block; }
-  .pname { font-size: 36px; font-weight: 800; letter-spacing: -0.04em; }
+  .pname { font-size: 36px; font-weight: 800; letter-spacing: -0.03em; }
   .pname small { font-size: 17px; font-weight: 600; color: var(--g500); letter-spacing: 0; margin-left: 10px; }
-  .ptitle { font-size: 16px; font-weight: 600; margin-top: 8px; }
-  .pdesc { font-size: 15px; line-height: 1.65; color: var(--sub); margin-top: 8px; }
-  .cta { display: inline-block; margin-top: 16px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 700; padding: 10px 16px; border-radius: 10px; }
-  .mail { margin-left: 14px; font-size: 14px; font-weight: 600; color: var(--sub); }
+  .ptitle { font-size: 16px; font-weight: 600; margin-top: 8px; letter-spacing: -0.01em; }
+  .pdesc { font-size: 15px; line-height: 1.65; color: var(--sub); margin-top: 8px; letter-spacing: -0.005em; }
+  .cta { display: inline-block; margin-top: 16px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 700; padding: 10px 16px; border-radius: 10px; letter-spacing: 0; }
+  .mail { margin-left: 14px; font-size: 14px; font-weight: 600; color: var(--sub); letter-spacing: 0; }
   section.block { padding: 30px 0 4px; }
-  section.block > h2 { margin: 0 0 12px; font-size: 18px; }
-  .r { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 9px 0; font-size: 14.5px; line-height: 1.55; }
+  section.block > h2 { margin: 0 0 12px; font-size: 18px; letter-spacing: -0.01em; }
+  .r { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 9px 0; font-size: 14.5px; line-height: 1.55; letter-spacing: -0.005em; }
   .r .d { color: var(--g500); font-weight: 600; font-size: 13.5px; font-variant-numeric: tabular-nums; }
   .r b { font-weight: 700; }
   .r span.s { display: block; color: var(--sub); font-size: 13.5px; margin-top: 2px; }
   .r a { color: var(--blue); font-weight: 700; font-size: 13px; margin-left: 6px; white-space: nowrap; }
   .demos { background: var(--soft); border-top: 1px solid var(--line); margin-top: 40px; padding: 44px 0 16px; }
-  .demos h2 { margin: 0; font-size: 24px; }
+  .demos h2 { margin: 0; font-size: 24px; letter-spacing: -0.01em; }
   .demo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 20px; }
-  .demo { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: border-color .15s; }
+  .demo { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: border-color .15s; letter-spacing: -0.005em; }
   .demo:hover { border-color: var(--blue); }
   .demo .thumb { aspect-ratio: 16 / 8; background: #0e1116 center / cover no-repeat; }
   .demo .b { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
   .demo .type { font-size: 12px; font-weight: 700; color: var(--blue); }
-  .demo .t { font-size: 17px; font-weight: 800; margin-top: 4px; letter-spacing: -0.03em; }
+  .demo .t { font-size: 16.5px; font-weight: 800; margin-top: 4px; letter-spacing: -0.015em; line-height: 1.35; }
   .demo .s { font-size: 13.5px; color: var(--sub); line-height: 1.55; margin-top: 6px; flex: 1; }
   .demo .open { margin-top: 14px; text-align: center; background: var(--blue); color: #fff; font-size: 14px; font-weight: 700; padding: 10px 0; border-radius: 10px; }
   @media (max-width: 680px) { .profile { grid-template-columns: 1fr; } .r { grid-template-columns: 1fr; gap: 2px; } .demo-grid { grid-template-columns: 1fr; } }
@@ -38,71 +38,71 @@
 </head>
 <body>
 <div class="wrap cv">
-  <div class="top"><span class="brand"><i></i>윤태환</span>
-    <nav class="nav"><a class="on" href="#">CV</a><a href="#demos">인터랙티브 데모</a></nav></div>
+  <div class="top"><span class="brand"><i></i>Taehwan Yun</span>
+    <nav class="nav"><a class="on" href="#">CV</a><a href="#demos">Interactive Demos</a></nav></div>
 
   <header class="profile">
-    <img src="assets/profile.jpg" alt="윤태환 증명사진">
+    <img src="assets/profile.jpg" alt="Portrait of Taehwan Yun">
     <div>
-      <div class="pname">윤태환<small>Taehwan Yun</small></div>
-      <div class="ptitle">성균관대학교 기계공학 | 로봇 조작, 자율주행</div>
-      <p class="pdesc">원격조작 장치와 로봇핸드를 직접 설계하고 제작했으며, 사람 손 영상으로 로봇 학습 데이터를 만드는 연구에 참여했습니다.</p>
-      <a class="cta" href="#demos">프로젝트 인터랙티브 데모 보기 ↓</a><a class="mail" href="mailto:rachy10392@gmail.com">rachy10392@gmail.com</a>
+      <div class="pname">Taehwan Yun<small>윤태환</small></div>
+      <div class="ptitle">Mechanical Engineering, Sungkyunkwan University</div>
+      <p class="pdesc">I'm interested in dexterous manipulation and robot learning, including grasp optimization, teleoperation and imitation learning, force-aware policies, force-based contact estimation, center-of-mass-aware contact point prediction, local finger control with force sensing, real-to-sim-to-real transfer, and 3D reconstruction.</p>
+      <a class="cta" href="#demos">View Interactive Demos ↓</a><a class="mail" href="mailto:rachy10392@gmail.com">rachy10392@gmail.com</a>
     </div>
   </header>
 
-  <section class="block"><h2>학력</h2>
-    <div class="r"><div class="d">2027.02 졸업 예정</div><div><b>성균관대학교 기계공학</b></div></div>
+  <section class="block"><h2>Education</h2>
+    <div class="r"><div class="d">Expected Feb 2027</div><div><b>B.S. in Mechanical Engineering</b><span class="s">Sungkyunkwan University</span></div></div>
   </section>
 
-  <section class="block"><h2>연구 경력</h2>
-    <div class="r"><div class="d">2025.05 ~ 2026.09</div><div><b>Robotics Innovatory, 학부연구생</b><span class="s">원격조작 데이터 수집 장치, 사람 손 영상 기반 로봇 시연 생성</span></div></div>
+  <section class="block"><h2>Research Experience</h2>
+    <div class="r"><div class="d">May 2025 – Sep 2026</div><div><b>Undergraduate Researcher, Robotics Innovatory</b><span class="s">Teleoperation data collection, robot demonstrations from human video</span></div></div>
   </section>
 
-  <section class="block"><h2>논문과 발표</h2>
-    <div class="r"><div class="d">2026.11</div><div><b>Object-Mesh-Free Dexterous Robot Demonstrations from Human RGB-D Video and Teleoperation</b><a href="https://doi.org/10.3390/machines14111303">논문 보기 →</a><span class="s">Machines 2026, 14(11), 1303, 공저자</span></div></div>
-    <div class="r"><div class="d">게재 예정</div><div><b>16자유도 로봇핸드 설계 논문</b><span class="s">대한기계학회 논문집 C, 특허 출원 예정</span></div></div>
-    <div class="r"><div class="d">2026.06</div><div><b>창의혁신 DNA 비전캠프 초청 연사</b><span class="s">팀 프로젝트 수행기1, 창의혁신 DNA 연구팀</span></div></div>
-    <div class="r"><div class="d">2026.02</div><div><b>한국로봇종합학술대회</b><span class="s">참여 연구를 지도교수님이 발표</span></div></div>
-    <div class="r"><div class="d">2025</div><div><b>지속가능발전을 위한 대학혁신포럼</b><span class="s">학생성공 사례 발표</span></div></div>
+  <section class="block"><h2>Publications and Talks</h2>
+    <div class="r"><div class="d">Nov 2026</div><div><b>Object-Mesh-Free Dexterous Robot Demonstrations from Human RGB-D Video and Teleoperation</b><a href="https://doi.org/10.3390/machines14111303">Paper →</a><span class="s">J. Hong, S. Um, Y. G. Son, C. H. Kwon, C. Ahn, T. Bae, S. Leeu, <b>T. Yun</b>, T. Ko, H. R. Choi. <i>Machines</i> 2026, 14(11), 1303.</span></div></div>
+    <div class="r"><div class="d">To appear</div><div><b>Design of a 16-DoF Robotic Hand</b><span class="s">Transactions of the Korean Society of Mechanical Engineers C, patent application planned</span></div></div>
+    <div class="r"><div class="d">Jun 2026</div><div><b>Invited Speaker, Creative Innovation DNA Vision Camp</b><span class="s">Talk on the Creative Innovation DNA research team project</span></div></div>
+    <div class="r"><div class="d">Feb 2026</div><div><b>Korea Robotics Society Annual Conference (KRoC)</b><span class="s">Research contribution presented by my advisor</span></div></div>
+    <div class="r"><div class="d">2025</div><div><b>University Innovation Forum for Sustainable Development</b><span class="s">Student success case presentation</span></div></div>
   </section>
 
-  <section class="block"><h2>프로젝트</h2>
-    <div class="r"><div class="d">2025.05 ~ 2025.10</div><div><b>Force-Reflecting Teleoperation with a Half-Scale Kinematic Replica of a 6-DoF Collaborative Robot</b><a href="teleoperation.html">3D 데모 →</a><span class="s">RB10을 0.5배로 축소한 리더암 설계와 외력 피드백 구현, HW 4명과 SW 4명 총괄</span></div></div>
-    <div class="r"><div class="d">2026.05 ~ 2026.09</div><div><b>16-DoF Modular Robotic Hand with Linkage-Coupled Fingers and Passive Compliant Fingertips</b><a href="robotic-hand.html">3D 데모 →</a><span class="s">ESP32 펌웨어, 전원 배선, 시뮬레이션 검증, 탄성 손끝 관절 제안</span></div></div>
-    <div class="r"><div class="d">2026.05 ~ 2026.07</div><div><b>Camera-LiDAR Autonomous Driving and Perpendicular Parking on a Modified Ride-On Vehicle</b><a href="autonomous-vehicle.html">주행 데모 →</a><span class="s">영상 인식, 판단 로직, 시뮬레이션 검증, 조향 연결부 이격 진단</span></div></div>
-    <div class="r"><div class="d">2026</div><div><b>AMET 2026 자율주행 해커톤</b><a href="amet.html">라벨 영상 →</a><span class="s">End-to-End 주행 모델과 시뮬레이터 담당, Raspberry Pi 5 온디바이스 추론</span></div></div>
-    <div class="r"><div class="d">2026.02 ~</div><div><b>Statute-Based Rule Engine for Land-Use Regulation Assessment</b><span class="s">법령을 코드 규칙으로 바꿔 토지 규제를 판정하는 서비스, 창업자, 설계와 검증, 모두의창업 1라운드 통과</span></div></div>
-    <div class="r"><div class="d">2025.01 ~ 2025.03</div><div><b>RightSite LLC 프리랜서 용역</b><span class="s">미국 EV 충전소 입지 분석용 지리, 인구통계, 전력회사 데이터 처리</span></div></div>
+  <section class="block"><h2>Projects</h2>
+    <div class="r"><div class="d">May 2025 – Oct 2025</div><div><b>Force-Reflecting Teleoperation with a Half-Scale Kinematic Replica of a 6-DoF Collaborative Robot</b><a href="teleoperation.html">3D Demo →</a><span class="s">Designed a 0.5x leader arm for the RB10, implemented external force feedback, led a team of 4 HW and 4 SW members</span></div></div>
+    <div class="r"><div class="d">May 2026 – Sep 2026</div><div><b>16-DoF Modular Robotic Hand with Linkage-Coupled Fingers and Passive Compliant Fingertips</b><a href="robotic-hand.html">3D Demo →</a><span class="s">ESP32 firmware, power wiring, simulation validation, proposed the passive compliant fingertip joint</span></div></div>
+    <div class="r"><div class="d">May 2026 – Jul 2026</div><div><b>Camera-LiDAR Autonomous Driving and Perpendicular Parking on a Modified Ride-On Vehicle</b><a href="autonomous-vehicle.html">Driving Demo →</a><span class="s">Visual perception, decision logic, simulation validation, diagnosed steering linkage backlash</span></div></div>
+    <div class="r"><div class="d">2026</div><div><b>AMET 2026 Autonomous Driving Hackathon</b><a href="amet.html">Label Video →</a><span class="s">End-to-end driving model and simulator, on-device inference on Raspberry Pi 5</span></div></div>
+    <div class="r"><div class="d">Feb 2026 –</div><div><b>Statute-Based Rule Engine for Land-Use Regulation Assessment</b><span class="s">Founder, system design and validation, passed Round 1 of the Korean national startup program</span></div></div>
+    <div class="r"><div class="d">Jan 2025 – Mar 2025</div><div><b>Freelance Contractor, RightSite LLC</b><span class="s">Geographic, demographic, and utility data processing for U.S. EV charging site analysis</span></div></div>
   </section>
 
-  <section class="block"><h2>수상</h2>
-    <div class="r"><div class="d">2025</div><div>창의혁신 DNA 산학협력 <b>대상</b></div></div>
-    <div class="r"><div class="d">2026</div><div>AMET 2026 자율주행 해커톤 <b>최우수상</b>, 본선 2위</div></div>
-    <div class="r"><div class="d">2025.11</div><div>2025 창의적 종합설계 경진대회 <b>은상</b></div></div>
-    <div class="r"><div class="d">2026</div><div>제4회 성균관대 AI 자율주행 경진대회 SW부문 <b>은상</b></div></div>
-    <div class="r"><div class="d">2025.11</div><div>2025 창의적 종합설계 경진대회 <b>월드클래스기업협회장상</b></div></div>
-    <div class="r"><div class="d">2026.10</div><div>대한기계학회 전국학생설계경진대회 <b>동상</b></div></div>
-    <div class="r"><div class="d">2026.01</div><div>제1회 성균관대 자율주행 AI 칩 설계 경진대회 <b>장려상</b></div></div>
+  <section class="block"><h2>Awards</h2>
+    <div class="r"><div class="d">2025</div><div><b>Grand Prize</b>, Creative Innovation DNA Industry-Academia Collaboration</div></div>
+    <div class="r"><div class="d">2026</div><div><b>Top Excellence Award</b>, AMET 2026 Autonomous Driving Hackathon (2nd place in the finals)</div></div>
+    <div class="r"><div class="d">Nov 2025</div><div><b>Silver Prize</b>, 2025 Creative Capstone Design Competition</div></div>
+    <div class="r"><div class="d">2026</div><div><b>Silver Prize</b>, 4th SKKU AI Autonomous Driving Competition, Software Division</div></div>
+    <div class="r"><div class="d">Nov 2025</div><div><b>World Class Enterprise Association Chairman's Award</b>, 2025 Creative Capstone Design Competition</div></div>
+    <div class="r"><div class="d">Oct 2026</div><div><b>Bronze Prize</b>, KSME National Student Design Competition</div></div>
+    <div class="r"><div class="d">Jan 2026</div><div><b>Honorable Mention</b>, 1st SKKU Autonomous Driving AI Chip Design Competition</div></div>
   </section>
 
-  <section class="block"><h2>기술</h2>
-    <div class="r"><div class="d">언어, 도구</div><div>Python, C++, C# (Unity), Linux, Git, MuJoCo</div></div>
-    <div class="r"><div class="d">임베디드</div><div>ESP32, Arduino, Raspberry Pi 5, Ultra96-V2 FPGA, Dynamixel</div></div>
+  <section class="block"><h2>Skills</h2>
+    <div class="r"><div class="d">Languages, Tools</div><div>Python, C++, C# (Unity), Linux, Git, MuJoCo</div></div>
+    <div class="r"><div class="d">Embedded</div><div>ESP32, Arduino, Raspberry Pi 5, Ultra96-V2 FPGA, Dynamixel</div></div>
   </section>
 </div>
 
 <div class="demos" id="demos">
   <div class="wrap cv">
-    <h2>인터랙티브 데모</h2>
-    <p class="sec-sub" style="margin:6px 0 0">아래 버튼을 누르면 프로젝트별 데모 페이지로 이동합니다.</p>
+    <h2>Interactive Demos</h2>
+    <p class="sec-sub" style="margin:6px 0 0">Each button opens a dedicated demo page.</p>
     <div class="demo-grid">
-      <a class="demo" href="teleoperation.html"><div class="thumb" style="background-image:url(assets/ragtal/teleop.jpg)"></div><div class="b"><div class="type">3D 뷰어</div><div class="t">Force-Reflecting Teleoperation with a Half-Scale Kinematic Replica of a 6-DoF Collaborative Robot</div><div class="s">리더암의 관절을 직접 움직이며, RB10이 같은 자세로 따라오는 모습을 확인해 보실 수 있습니다.</div><div class="open">3D 뷰어 열기 →</div></div></a>
-      <a class="demo" href="robotic-hand.html"><div class="thumb" style="background-image:url(assets/hand/bulb_full_8x.jpg)"></div><div class="b"><div class="type">3D 뷰어</div><div class="t">16-DoF Modular Robotic Hand with Linkage-Coupled Fingers and Passive Compliant Fingertips</div><div class="s">손가락을 하나씩 움직여 보며, 중간 관절을 따라 손끝이 함께 굽는 링크 연동을 살펴보실 수 있습니다.</div><div class="open">3D 뷰어 열기 →</div></div></a>
-      <a class="demo" href="autonomous-vehicle.html"><div class="thumb" style="background-image:url(assets/ctrlzero/track.jpg)"></div><div class="b"><div class="type">주행 재생</div><div class="t">Camera-LiDAR Autonomous Driving and Perpendicular Parking on a Modified Ride-On Vehicle</div><div class="s">대회 트랙에서 맵 주행과 수직 주차 미션을 egoview와 함께 보실 수 있습니다.</div><div class="open">주행 재생 열기 →</div></div></a>
-      <a class="demo" href="amet.html"><div class="thumb" style="background-image:url(assets/amet/labels_151329.jpg)"></div><div class="b"><div class="type">영상</div><div class="t">AMET 2026</div><div class="s">실제 주행 프레임에 조향과 속도를 지정한 라벨을 영상으로 확인해 보실 수 있습니다.</div><div class="open">라벨 영상 열기 →</div></div></a>
+      <a class="demo" href="teleoperation.html"><div class="thumb" style="background-image:url(assets/ragtal/teleop.jpg)"></div><div class="b"><div class="type">3D Viewer</div><div class="t">Force-Reflecting Teleoperation with a Half-Scale Kinematic Replica of a 6-DoF Collaborative Robot</div><div class="s">Move the joints of the leader arm and watch the RB10 follow in the same pose.</div><div class="open">Open 3D Viewer →</div></div></a>
+      <a class="demo" href="robotic-hand.html"><div class="thumb" style="background-image:url(assets/hand/bulb_full_8x.jpg)"></div><div class="b"><div class="type">3D Viewer</div><div class="t">16-DoF Modular Robotic Hand with Linkage-Coupled Fingers and Passive Compliant Fingertips</div><div class="s">Move each finger and see how the fingertip follows the middle joint through the coupling linkage.</div><div class="open">Open 3D Viewer →</div></div></a>
+      <a class="demo" href="autonomous-vehicle.html"><div class="thumb" style="background-image:url(assets/ctrlzero/track.jpg)"></div><div class="b"><div class="type">Driving Replay</div><div class="t">Camera-LiDAR Autonomous Driving and Perpendicular Parking on a Modified Ride-On Vehicle</div><div class="s">Watch the lane-driving and perpendicular-parking missions on the competition track, with the ego view.</div><div class="open">Open Driving Replay →</div></div></a>
+      <a class="demo" href="amet.html"><div class="thumb" style="background-image:url(assets/amet/labels_151329.jpg)"></div><div class="b"><div class="type">Video</div><div class="t">AMET 2026 Autonomous Driving Hackathon</div><div class="s">Watch real driving frames annotated with hand-specified steering and speed labels.</div><div class="open">Watch Label Video →</div></div></a>
     </div>
-    <footer style="padding:40px 0 28px">© 2026 윤태환</footer>
+    <footer style="padding:40px 0 28px">© 2026 Taehwan Yun</footer>
   </div>
 </div>
 </body>
